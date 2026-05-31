@@ -1,0 +1,17 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/_global-error/page": "/_global-error",
+  "/favicon.ico/route": "/favicon.ico",
+  "/auth/account/page": "/auth/account",
+  "/auth/login/page": "/auth/login",
+  "/auth/register/page": "/auth/register",
+  "/bookmarks/page": "/bookmarks",
+  "/course/[courseId]/[chapterId]/page": "/course/[courseId]/[chapterId]",
+  "/course/[courseId]/page": "/course/[courseId]",
+  "/dashboard/page": "/dashboard",
+  "/page": "/",
+  "/question/[questionId]/page": "/question/[questionId]",
+  "/quiz/page": "/quiz",
+  "/review/page": "/review",
+  "/search/page": "/search"
+}

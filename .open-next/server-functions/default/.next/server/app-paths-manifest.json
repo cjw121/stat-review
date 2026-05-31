@@ -1,0 +1,17 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/_global-error/page": "app/_global-error/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/auth/account/page": "app/auth/account/page.js",
+  "/auth/login/page": "app/auth/login/page.js",
+  "/auth/register/page": "app/auth/register/page.js",
+  "/bookmarks/page": "app/bookmarks/page.js",
+  "/course/[courseId]/[chapterId]/page": "app/course/[courseId]/[chapterId]/page.js",
+  "/course/[courseId]/page": "app/course/[courseId]/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/page": "app/page.js",
+  "/question/[questionId]/page": "app/question/[questionId]/page.js",
+  "/quiz/page": "app/quiz/page.js",
+  "/review/page": "app/review/page.js",
+  "/search/page": "app/search/page.js"
+}

@@ -1,0 +1,1120 @@
+[
+  {
+    "id": "aa-001",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch1",
+    "question": "什么是数域？全体整数构成数域吗？最小和最大的数域分别是什么？",
+    "answer": "设 $P$ 是由一些复数组成的集合，其中包含 $0$ 与 $1$。若 $P$ 中任意两个数的和、差、积、商（除数不为 $0$）仍属于 $P$，则称 $P$ 为一个数域。全体整数不构成数域，因为两个整数相除不一定还是整数（对除法不封闭）。最小的数域是有理数域 $\\mathbb{Q}$，最大的数域是复数域 $\\mathbb{C}$。",
+    "followups": [
+      "为什么有理数域是最小数域？任何数域都包含 $\\mathbb{Q}$ 吗？",
+      "$\\{a+b\\sqrt2 : a,b\\in\\mathbb{Q}\\}$ 是数域吗？"
+    ],
+    "difficulty": "基础",
+    "tags": ["数域", "多项式"]
+  },
+  {
+    "id": "aa-002",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch1",
+    "question": "怎么判断一个多项式整除另一个多项式？",
+    "answer": "对数域 $P$ 上的多项式 $f(x)$ 与 $g(x)$（$g(x)\\ne0$），$g(x)\\mid f(x)$ 的充要条件是用 $g(x)$ 除 $f(x)$ 所得的余式为 $0$。即做带余除法 $f(x)=q(x)g(x)+r(x)$，当 $r(x)=0$ 时整除成立。",
+    "followups": [
+      "整除关系与系数所在的数域有关吗？",
+      "$x-a\\mid f(x)$ 的充要条件是什么？"
+    ],
+    "difficulty": "基础",
+    "tags": ["整除", "多项式"]
+  },
+  {
+    "id": "aa-003",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch1",
+    "question": "叙述多项式的带余除法。",
+    "answer": "设 $f(x),g(x)\\in P[x]$ 且 $g(x)\\ne0$，则存在唯一的多项式 $q(x)$（商）与 $r(x)$（余式），使 $f(x)=q(x)g(x)+r(x)$，其中 $r(x)=0$ 或 $\\deg r(x)<\\deg g(x)$。带余除法是多项式理论的基础，整除、最大公因式（辗转相除）都建立在它之上。",
+    "followups": [
+      "商和余式为什么是唯一的？",
+      "带余除法与整数的带余除法有什么类比？"
+    ],
+    "difficulty": "基础",
+    "tags": ["带余除法", "多项式"]
+  },
+  {
+    "id": "aa-004",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch1",
+    "question": "什么是最大公因式？",
+    "answer": "对多项式 $f(x)$ 与 $g(x)$，若 $d(x)$ 满足：(1) $d(x)$ 是 $f(x)$ 与 $g(x)$ 的公因式；(2) $f(x)$ 与 $g(x)$ 的任意公因式都是 $d(x)$ 的因式，则称 $d(x)$ 为它们的一个最大公因式。最大公因式在相差一个非零常数倍的意义下唯一，通常取首项系数为 $1$ 的那个，可用辗转相除法求出。",
+    "followups": [
+      "如何用辗转相除法求最大公因式？",
+      "最大公因式与数域有关吗？换数域会变吗？"
+    ],
+    "difficulty": "基础",
+    "tags": ["最大公因式", "多项式"]
+  },
+  {
+    "id": "aa-005",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch1",
+    "question": "$f(x)$ 与 $g(x)$ 互素的充要条件是什么？",
+    "answer": "$f(x)$ 与 $g(x)$ 互素，当且仅当存在数域 $P$ 上的多项式 $u(x),v(x)$，使得 $u(x)f(x)+v(x)g(x)=1$。这个等式（裴蜀等式）是判断与运用互素的核心工具，它把互素这一性质化为一个可构造的代数恒等式。",
+    "followups": [
+      "若 $f\\mid gh$ 且 $f$ 与 $g$ 互素，能推出什么？",
+      "互素与最大公因式为 1 是一回事吗？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["互素", "多项式"]
+  },
+  {
+    "id": "aa-006",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch1",
+    "question": "叙述余数定理与因式定理。",
+    "answer": "余数定理：多项式 $f(x)$ 除以 $x-a$ 所得余数等于 $f(a)$。因式定理：$x-a$ 是 $f(x)$ 的因式（即 $x-a\\mid f(x)$）的充要条件是 $f(a)=0$，也就是 $a$ 是 $f(x)$ 的根。因式定理把“求根”与“分解因式”联系起来。",
+    "followups": [
+      "由此推出：$n$ 次多项式至多有 $n$ 个根，怎么证明？",
+      "如果 $a$ 是 $k$ 重根，$(x-a)^k$ 整除 $f$ 吗？"
+    ],
+    "difficulty": "基础",
+    "tags": ["余数定理", "因式定理", "多项式"]
+  },
+  {
+    "id": "aa-007",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch1",
+    "question": "什么是不可约多项式？",
+    "answer": "对数域 $P$ 上次数 $\\ge1$ 的多项式 $p(x)$，若它不能表示成 $P$ 上两个次数都比 $p(x)$ 低的多项式的乘积，则称 $p(x)$ 为 $P$ 上的不可约多项式。要特别注意：一个多项式是否不可约依赖于系数所在的数域，例如 $x^2+1$ 在实数域上不可约，但在复数域上可约。",
+    "followups": [
+      "$x^2-2$ 在 $\\mathbb{Q}$ 和 $\\mathbb{R}$ 上分别可约吗？",
+      "不可约多项式与素数有什么类比？"
+    ],
+    "difficulty": "基础",
+    "tags": ["不可约多项式", "多项式"]
+  },
+  {
+    "id": "aa-008",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch1",
+    "question": "不可约多项式有什么重要性质？",
+    "answer": "核心性质：若不可约多项式 $p(x)\\mid f(x)g(x)$（整除两个多项式之积），则必有 $p(x)\\mid f(x)$ 或 $p(x)\\mid g(x)$。这与素数的性质完全平行，是多项式唯一因式分解定理的关键，保证了任何多项式都能唯一地分解为不可约因式之积。",
+    "followups": [
+      "如何由这个性质推出多项式的唯一分解定理？",
+      "可约多项式有这个性质吗？举反例"
+    ],
+    "difficulty": "进阶",
+    "tags": ["不可约多项式", "多项式"]
+  },
+  {
+    "id": "aa-009",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch1",
+    "question": "什么是 $k$ 重因式？",
+    "answer": "设 $P$ 是数域，$p(x)\\in P[x]$ 是不可约多项式，$f(x)\\in P[x]$ 是任意多项式。若 $p(x)^k\\mid f(x)$（$p(x)$ 的 $k$ 次幂能整除 $f$），但 $p(x)^{k+1}\\nmid f(x)$，则称 $p(x)$ 是 $f(x)$ 的 $k$ 重因式（$k$ 为正整数）。",
+    "followups": [
+      "重因式和重根是一回事吗？",
+      "怎样判断一个多项式有没有重因式？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["重因式", "多项式"]
+  },
+  {
+    "id": "aa-010",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch1",
+    "question": "重因式与导数有什么关系？如何判断一个多项式有无重因式？",
+    "answer": "若 $p(x)$ 是 $f(x)$ 的 $k$ 重因式（$k\\ge1$），则它是导数 $f'(x)$ 的 $k-1$ 重因式。由此得到判别法：$f(x)$ 有重因式当且仅当 $f(x)$ 与 $f'(x)$ 不互素，即 $\\gcd(f,f')\\ne$ 常数。用 $f/\\gcd(f,f')$ 还能去掉重因式（得到没有重因式的多项式）。",
+    "followups": [
+      "为什么求导会让重数降一阶？",
+      "如何用这个方法把一个多项式化为无重根？"
+    ],
+    "difficulty": "拔高",
+    "tags": ["重因式", "导数", "多项式"]
+  },
+  {
+    "id": "aa-011",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch1",
+    "question": "叙述艾森斯坦（Eisenstein）判别法。",
+    "answer": "设 $f(x)=a_nx^n+a_{n-1}x^{n-1}+\\cdots+a_1x+a_0$ 是整系数多项式（$n\\ge1$）。若存在一个素数 $p$，满足：(1) $p\\nmid a_n$（首项系数不被 $p$ 整除）；(2) $p\\mid a_{n-1},\\dots,p\\mid a_0$（其余系数都被 $p$ 整除）；(3) $p^2\\nmid a_0$（常数项不被 $p^2$ 整除），则 $f(x)$ 在有理数域 $\\mathbb{Q}$ 上不可约。",
+    "followups": [
+      "用艾森斯坦判别法证明 $x^p-2$ 在 $\\mathbb{Q}$ 上不可约",
+      "判别法不满足时能否断定多项式可约？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["艾森斯坦判别法", "不可约", "多项式"]
+  },
+  {
+    "id": "aa-012",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch1",
+    "question": "叙述代数基本定理。",
+    "answer": "代数基本定理：每个次数 $\\ge1$ 的复系数多项式在复数域中至少有一个根。由此可推出：$n$ 次复系数多项式恰有 $n$ 个复根（按重数计）。换言之，在复数域上不可约多项式只有一次多项式，所有次数 $\\ge2$ 的多项式都可约。",
+    "followups": [
+      "在实数域上不可约多项式有哪些（次数）？",
+      "实系数多项式的复根有什么对称性（共轭成对）？"
+    ],
+    "difficulty": "基础",
+    "tags": ["代数基本定理", "多项式"]
+  },
+  {
+    "id": "aa-013",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch1",
+    "question": "复系数和实系数多项式的标准因式分解分别是怎样的？",
+    "answer": "复系数多项式：由代数基本定理，总能分解为一次因式之积 $a_n(x-c_1)(x-c_2)\\cdots(x-c_n)$。实系数多项式：其复根成共轭对出现，把共轭对乘起来得到判别式小于零的二次实因式，因此总能分解为一次实因式和二次不可约实因式之积。所以实数域上不可约多项式只有一次的和二次（判别式 $<0$）两类。",
+    "followups": [
+      "为什么实系数多项式的虚根必成共轭对？",
+      "奇数次实系数多项式为什么必有实根？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["因式分解", "复系数", "实系数"]
+  },
+  {
+    "id": "aa-014",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch1",
+    "question": "什么是本原多项式？高斯引理说了什么？",
+    "answer": "若一个整系数多项式的所有系数的最大公因数为 $1$（系数互素），则称它为本原多项式。高斯引理：有限多个本原多项式的乘积仍是本原多项式。由此可证：一个整系数多项式在 $\\mathbb{Q}$ 上可约当且仅当它能分解成两个次数更低的整系数多项式之积，从而把有理数域上的因式分解问题转化为整系数问题。",
+    "followups": [
+      "本原多项式的概念在证明艾森斯坦判别法时怎么用？",
+      "任意整系数多项式能否写成常数乘以本原多项式？"
+    ],
+    "difficulty": "拔高",
+    "tags": ["本原多项式", "高斯引理"]
+  },
+  {
+    "id": "aa-015",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch1",
+    "question": "整系数多项式的有理根如何判定？",
+    "answer": "有理根定理：设整系数多项式 $f(x)=a_nx^n+\\cdots+a_0$，若既约分数 $\\frac{p}{q}$ 是它的根，则必有 $p\\mid a_0$（分子整除常数项）、$q\\mid a_n$（分母整除首项系数）。于是只需在有限多个候选 $\\frac{p}{q}$ 中逐一检验，即可找出所有有理根。特别地，首一整系数多项式的有理根必为整数。",
+    "followups": [
+      "用有理根定理判断 $x^3-3x+1$ 有无有理根",
+      "没有有理根能说明多项式在 $\\mathbb{Q}$ 上不可约吗？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["有理根定理", "多项式"]
+  },
+  {
+    "id": "aa-016",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch2",
+    "question": "行列式的几何意义是什么？",
+    "answer": "$n$ 阶行列式 $\\det A$ 的绝对值表示由 $A$ 的列（或行）向量张成的 $n$ 维平行多面体的体积（二阶是平行四边形面积，三阶是平行六面体体积）；它的符号表示这组向量是否保持定向。因此 $\\det A=0$ 意味着向量组线性相关、被压缩到低维（体积为零），这正对应矩阵不可逆。",
+    "followups": [
+      "为什么 $\\det A=0$ 等价于 $A$ 不可逆？",
+      "$\\det(AB)=\\det A\\det B$ 的几何解释是什么？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["行列式", "几何意义"]
+  },
+  {
+    "id": "aa-017",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch2",
+    "question": "行列式有哪些基本性质？",
+    "answer": "主要性质：(1) 转置不改变行列式，$\\det A^T=\\det A$；(2) 交换两行（列）行列式变号；(3) 某行（列）有公因子可提到行列式外；(4) 把某行（列）的倍数加到另一行（列），行列式不变；(5) 若两行（列）成比例或有零行，则行列式为零；(6) $\\det(AB)=\\det A\\cdot\\det B$。这些性质是计算行列式（化为上三角）的基础。",
+    "followups": [
+      "为什么倍加变换不改变行列式？",
+      "$\\det(kA)$ 等于多少（$A$ 为 $n$ 阶）？"
+    ],
+    "difficulty": "基础",
+    "tags": ["行列式", "性质"]
+  },
+  {
+    "id": "aa-018",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch2",
+    "question": "叙述克莱姆（Cramer）法则。",
+    "answer": "设 $n$ 元非齐次线性方程组 $A\\mathbf{x}=\\mathbf{b}$，其系数行列式 $D=\\det A$。若 $D\\ne0$，则方程组有唯一解，且 $x_j=\\dfrac{D_j}{D}$，其中 $D_j$ 是把 $D$ 的第 $j$ 列换成常数项列 $\\mathbf{b}$ 后得到的行列式。克莱姆法则给出了解的显式公式，但计算量大，主要用于理论分析而非实际求解。",
+    "followups": [
+      "$D=0$ 时方程组的解会怎样？",
+      "齐次方程组 $A\\mathbf{x}=\\mathbf{0}$ 有非零解的充要条件是什么？"
+    ],
+    "difficulty": "基础",
+    "tags": ["克莱姆法则", "线性方程组"]
+  },
+  {
+    "id": "aa-019",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch2",
+    "question": "叙述拉普拉斯（Laplace）定理。",
+    "answer": "在 $n$ 阶行列式 $D$ 中，任意取定 $k$ 行（$1\\le k\\le n-1$），则由这 $k$ 行元素所构成的一切 $k$ 阶子式与它们各自对应的代数余子式的乘积之和，等于行列式 $D$ 的值。它是按一行（列）展开的推广——按一行展开正是 $k=1$ 的特例。",
+    "followups": [
+      "按一行展开是拉普拉斯定理的什么特例？",
+      "代数余子式和余子式差在哪（符号）？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["拉普拉斯定理", "行列式"]
+  },
+  {
+    "id": "aa-020",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch2",
+    "question": "矩阵的秩和向量组的秩分别是什么？",
+    "answer": "矩阵的秩有两个等价刻画：它的非零子式的最高阶数；也等于矩阵中线性无关的行向量（或列向量）的最大个数（行秩等于列秩）。向量组的秩是指其极大线性无关组所含向量的个数。把向量组排成矩阵，则向量组的秩就等于该矩阵的秩。",
+    "followups": [
+      "为什么行秩一定等于列秩？",
+      "初等变换会改变矩阵的秩吗？"
+    ],
+    "difficulty": "基础",
+    "tags": ["秩", "向量组"]
+  },
+  {
+    "id": "aa-021",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch2",
+    "question": "求矩阵的秩有哪些方法？",
+    "answer": "常用两种：(1) 子式法——若存在某个 $r$ 阶子式不为零，而所有 $r+1$ 阶子式都为零，则秩为 $r$；(2) 初等变换法（最常用）——用初等行变换把矩阵化为阶梯形，非零行的行数即为秩。初等变换不改变矩阵的秩，所以这种方法既简便又可靠。",
+    "followups": [
+      "为什么初等变换不改变秩？",
+      "化成阶梯形后，主元（pivot）个数和秩什么关系？"
+    ],
+    "difficulty": "基础",
+    "tags": ["秩", "初等变换"]
+  },
+  {
+    "id": "aa-022",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch2",
+    "question": "初等变换有哪几种类型？",
+    "answer": "矩阵的初等变换有三种（行、列各三种）：(1) 交换两行（或两列）；(2) 用一个非零数 $k$ 乘某一行（或某一列）；(3) 把某一行（列）的 $k$ 倍加到另一行（列）上。每种初等变换都对应左乘（行变换）或右乘（列变换）一个初等矩阵。",
+    "followups": [
+      "三种初等变换分别对应怎样的初等矩阵？",
+      "初等变换是可逆操作吗？逆变换是什么？"
+    ],
+    "difficulty": "基础",
+    "tags": ["初等变换"]
+  },
+  {
+    "id": "aa-023",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch2",
+    "question": "初等矩阵和初等变换有什么关系？",
+    "answer": "对单位矩阵做一次初等变换得到的矩阵称为初等矩阵。对矩阵 $A$ 做一次初等行变换，等价于在左边乘以相应的初等矩阵；做初等列变换则等价于在右边乘以相应的初等矩阵。初等矩阵都可逆，其逆仍是同类型初等矩阵。这一对应是“可逆矩阵都能表示成初等矩阵之积”以及用初等变换求逆矩阵的理论基础。",
+    "followups": [
+      "如何用初等行变换求逆矩阵（$[A\\,|\\,E]\\to[E\\,|\\,A^{-1}]$）？",
+      "可逆矩阵为什么能写成有限个初等矩阵的乘积？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["初等矩阵", "初等变换"]
+  },
+  {
+    "id": "aa-024",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch2",
+    "question": "矩阵等价的定义和充要条件是什么？",
+    "answer": "定义：对同型矩阵 $A,B$，若存在可逆矩阵 $P,Q$ 使得 $B=PAQ$，则称 $A$ 与 $B$ 等价。等价的充要条件是：$A$ 与 $B$ 的秩相等。所以秩是同型矩阵在等价关系下的完全不变量，秩相同的同型矩阵都等价于同一个标准形 $\\begin{pmatrix}E_r&0\\\\0&0\\end{pmatrix}$。",
+    "followups": [
+      "矩阵等价、合同、相似三者的强弱关系是怎样的？",
+      "等价标准形是什么样子？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["等价", "秩"]
+  },
+  {
+    "id": "aa-025",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch2",
+    "question": "可逆矩阵有哪些等价条件？",
+    "answer": "对 $n$ 阶方阵 $A$，下列条件等价：(1) $A$ 可逆；(2) $\\det A\\ne0$（非奇异）；(3) $r(A)=n$（满秩）；(4) $A$ 的行（列）向量组线性无关；(5) 齐次方程组 $A\\mathbf{x}=\\mathbf{0}$ 只有零解；(6) $A$ 的特征值全不为零；(7) $A$ 可表示为有限个初等矩阵之积。这是高代里最常被串联考查的等价命题群。",
+    "followups": [
+      "为什么特征值全不为零等价于可逆？",
+      "这些条件你能从其中一个推出另一个吗？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["可逆矩阵", "等价条件"]
+  },
+  {
+    "id": "aa-026",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch2",
+    "question": "如果 $AB=E$，那么 $BA=E$ 吗？",
+    "answer": "对同阶方阵成立。$AB=E$ 说明 $\\det A\\cdot\\det B=1$，故 $\\det A\\ne0$，$A$ 可逆。两边左乘 $A^{-1}$：$A^{-1}=A^{-1}E=A^{-1}(AB)=B$，即 $B=A^{-1}$，于是 $BA=A^{-1}A=E$。所以对方阵而言，单侧逆即是双侧逆。注意：若 $A,B$ 不是方阵（非同阶），结论不成立。",
+    "followups": [
+      "对长方形矩阵，$AB=E$ 但 $BA\\ne E$ 的例子是什么？",
+      "为什么有限维和无限维情形这里会不同？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["可逆矩阵", "逆矩阵"]
+  },
+  {
+    "id": "aa-027",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch2",
+    "question": "矩阵 $AB$ 与 $BA$ 的秩有什么关系？",
+    "answer": "一般地 $AB$ 与 $BA$ 不一定同型，秩也未必相等。但有重要结论：当 $A,B$ 都是 $n$ 阶方阵时，$AB$ 与 $BA$ 有相同的非零特征值（计重数），从而它们的迹相等、特征多项式（在非零部分）一致。若进一步 $AB=BA$（可交换），则更易得到许多一致的性质。",
+    "followups": [
+      "为什么 $AB$ 和 $BA$ 的非零特征值相同？",
+      "$\\operatorname{tr}(AB)=\\operatorname{tr}(BA)$ 怎么证明？"
+    ],
+    "difficulty": "拔高",
+    "tags": ["秩", "矩阵乘积"]
+  },
+  {
+    "id": "aa-028",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch2",
+    "question": "矩阵秩有哪些常用的不等式？",
+    "answer": "常用的有：$r(AB)\\le\\min\\{r(A),r(B)\\}$（乘积的秩不超过各因子）；$r(A+B)\\le r(A)+r(B)$；西尔维斯特（Sylvester）不等式 $r(A)+r(B)-n\\le r(AB)$（其中 $A$ 为 $m\\times n$、$B$ 为 $n\\times p$）；以及 $r(A)=r(A^T)=r(A^TA)$。这些不等式在证明题中极常用。",
+    "followups": [
+      "若 $AB=0$，能由 Sylvester 不等式推出什么（$r(A)+r(B)\\le n$）？",
+      "为什么 $r(A^TA)=r(A)$（对实矩阵）？"
+    ],
+    "difficulty": "拔高",
+    "tags": ["秩", "不等式"]
+  },
+  {
+    "id": "aa-029",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch2",
+    "question": "伴随矩阵有哪些性质？",
+    "answer": "设 $A^*$ 为 $n$ 阶方阵 $A$ 的伴随矩阵，则 $AA^*=A^*A=\\det A\\cdot E$。由此得：当 $A$ 可逆时 $A^{-1}=\\frac{1}{\\det A}A^*$；$\\det A^*=(\\det A)^{n-1}$。伴随矩阵的秩满足：$r(A)=n$ 时 $r(A^*)=n$，$r(A)=n-1$ 时 $r(A^*)=1$，$r(A)<n-1$ 时 $r(A^*)=0$。",
+    "followups": [
+      "为什么 $r(A)=n-1$ 时 $r(A^*)=1$？",
+      "$(A^*)^*$ 等于什么？"
+    ],
+    "difficulty": "拔高",
+    "tags": ["伴随矩阵", "逆矩阵"]
+  },
+  {
+    "id": "aa-030",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch2",
+    "question": "矩阵的迹有哪些性质？",
+    "answer": "迹 $\\operatorname{tr}(A)$ 是方阵主对角线元素之和。主要性质：线性 $\\operatorname{tr}(A+B)=\\operatorname{tr}A+\\operatorname{tr}B$、$\\operatorname{tr}(kA)=k\\operatorname{tr}A$；交换性 $\\operatorname{tr}(AB)=\\operatorname{tr}(BA)$；相似不变 $\\operatorname{tr}(P^{-1}AP)=\\operatorname{tr}A$；并且迹等于全体特征值之和（计重数）。",
+    "followups": [
+      "为什么相似矩阵的迹相等？",
+      "由 $\\operatorname{tr}(AB)=\\operatorname{tr}(BA)$ 能推出不存在满足 $AB-BA=E$ 的实方阵，怎么证？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["迹", "矩阵"]
+  },
+  {
+    "id": "aa-031",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch2",
+    "question": "分块矩阵有什么用？分块对角矩阵怎么求逆和行列式？",
+    "answer": "分块矩阵把大矩阵按行列分成若干子块，可像普通矩阵一样做加法、乘法（要求分块相容），常用于简化大矩阵的运算和理论证明。对分块对角矩阵 $\\operatorname{diag}(A_1,\\dots,A_k)$，其行列式为 $\\prod\\det A_i$，逆为 $\\operatorname{diag}(A_1^{-1},\\dots,A_k^{-1})$。对分块上三角 $\\begin{pmatrix}A&B\\\\0&D\\end{pmatrix}$，行列式为 $\\det A\\cdot\\det D$。",
+    "followups": [
+      "分块矩阵相乘对分块的尺寸有什么要求？",
+      "如何用分块求 $\\begin{pmatrix}A&B\\\\0&D\\end{pmatrix}$ 的逆？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["分块矩阵"]
+  },
+  {
+    "id": "aa-032",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch2",
+    "question": "幂等矩阵的定义和性质是什么？",
+    "answer": "定义：若 $n$ 阶方阵 $A$ 满足 $A^2=A$，则称 $A$ 为幂等矩阵。性质：(1) 幂等矩阵的特征值只能是 $0$ 或 $1$；(2) 幂等矩阵可对角化；(3) 它的迹等于它的秩，$\\operatorname{tr}A=r(A)$；(4) $r(A)+r(E-A)=n$。幂等矩阵对应于向量空间上的投影变换。",
+    "followups": [
+      "为什么幂等矩阵的特征值只能是 0 或 1？",
+      "幂等矩阵为什么一定可对角化（看最小多项式）？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["幂等矩阵", "投影"]
+  },
+  {
+    "id": "aa-033",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch3",
+    "question": "线性相关和线性无关的定义是什么？",
+    "answer": "设 $\\boldsymbol{a}_1,\\dots,\\boldsymbol{a}_m$ 是 $m$ 个向量。对方程 $\\lambda_1\\boldsymbol{a}_1+\\cdots+\\lambda_m\\boldsymbol{a}_m=\\boldsymbol{0}$，若存在不全为零的系数 $(\\lambda_1,\\dots,\\lambda_m)$ 使等式成立，则称向量组线性相关；若只有全为零的系数才能使等式成立，则称线性无关。由定义可见，含零向量的向量组一定线性相关。",
+    "followups": [
+      "单个向量什么时候线性相关？",
+      "两个向量线性相关的几何含义是什么？"
+    ],
+    "difficulty": "基础",
+    "tags": ["线性相关", "线性无关", "向量组"]
+  },
+  {
+    "id": "aa-034",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch3",
+    "question": "向量组线性相关的充要条件有哪些？",
+    "answer": "等价说法有：(1) 存在一组不全为零的系数使向量的线性组合为零向量；(2) 向量组中至少有一个向量可由其余向量线性表出；(3) 把向量组按列排成矩阵 $A=[\\boldsymbol{v}_1,\\dots,\\boldsymbol{v}_m]$，则线性相关当且仅当齐次方程组 $A\\mathbf{x}=\\boldsymbol{0}$ 有非零解，即 $r(A)<m$（列秩小于向量个数）。",
+    "followups": [
+      "如果向量个数大于向量维数，一定线性相关吗？为什么？",
+      "线性无关对应的秩是多少？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["线性相关", "充要条件", "向量组"]
+  },
+  {
+    "id": "aa-035",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch3",
+    "question": "一个矩阵的列向量组线性无关有哪些等价说法？",
+    "answer": "对 $n$ 个 $n$ 维列向量构成的方阵 $A$，列向量组线性无关等价于：(1) $A$ 满秩 $r(A)=n$；(2) $A$ 非奇异，即 $\\det A\\ne0$；(3) $A$ 可逆；(4) 齐次方程组 $A\\mathbf{x}=\\boldsymbol{0}$ 只有零解；(5) $A$ 的所有特征值均非零。这组等价条件把“线性无关”和“可逆性”完全打通。",
+    "followups": [
+      "如果列数和行数不等（长方形矩阵），还有这些等价吗？",
+      "列向量组无关和行向量组无关有什么关系？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["线性无关", "等价条件", "向量组"]
+  },
+  {
+    "id": "aa-036",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch3",
+    "question": "向量组的“部分”与“整体”相关性有什么关系？",
+    "answer": "两条基本规律：(1) 部分相关则整体相关——若向量组的某个部分组线性相关，则整个向量组也线性相关；(2) 整体无关则部分无关——若整个向量组线性无关，则它的任何部分组也线性无关。直观地说，相关性“加向量只会更相关”，无关性“减向量只会更无关”。",
+    "followups": [
+      "整体相关能推出部分相关吗？举反例",
+      "这两条规律在证明题里常怎么用？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["线性相关", "向量组"]
+  },
+  {
+    "id": "aa-037",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch3",
+    "question": "为什么向量个数大于维数时一定线性相关？",
+    "answer": "在 $n$ 维空间中取 $m$ 个向量（$m>n$），把它们排成 $n\\times m$ 矩阵 $A$，则 $r(A)\\le n<m$。线性相关的充要条件是 $r(A)<m$，这里恰好满足，故必线性相关。本质原因是 $n$ 维空间中线性无关向量最多只有 $n$ 个（超过维数就装不下）。",
+    "followups": [
+      "这与“线性空间维数”的定义如何呼应？",
+      "$n+1$ 个 $n$ 维向量的线性组合零解为什么必有非零解？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["线性相关", "维数"]
+  },
+  {
+    "id": "aa-038",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch3",
+    "question": "什么是极大线性无关组？",
+    "answer": "设 $T$ 是数域 $P$ 上的一个向量组（可含有限或无限个向量）。若 $T$ 的子集 $\\alpha_1,\\dots,\\alpha_r$ 满足：(1) 线性无关性——这组向量本身线性无关；(2) 极大性——$T$ 中任意不属于该子集的向量加进来后所得的新组都线性相关，则称 $\\alpha_1,\\dots,\\alpha_r$ 是 $T$ 的一个极大线性无关组。其所含向量个数（即 $r$）就是向量组的秩，且 $T$ 中每个向量都能由它线性表出。",
+    "followups": [
+      "极大线性无关组唯一吗？不同极大无关组之间什么关系？",
+      "极大线性无关组所含向量个数为什么是固定的？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["极大线性无关组", "秩"]
+  },
+  {
+    "id": "aa-039",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch3",
+    "question": "向量组的秩和矩阵的秩有什么关系？",
+    "answer": "把一个向量组按列（或行）排成矩阵，则该向量组的秩恰好等于这个矩阵的秩。这也解释了“矩阵的行秩等于列秩”：因为它们都等于由这些行/列向量构成的向量组的秩。借助这一关系，判断向量组相关性、求极大无关组都可以转化为对矩阵做初等变换。",
+    "followups": [
+      "如何用初等行变换求向量组的极大无关组并把其余向量用它表出？",
+      "行变换会改变列向量组之间的线性关系吗？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["秩", "向量组", "矩阵"]
+  },
+  {
+    "id": "aa-040",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch3",
+    "question": "什么叫向量组等价？它和线性表出有什么联系？",
+    "answer": "若向量组 $(I)$ 中每个向量都能由向量组 $(II)$ 线性表出，且 $(II)$ 中每个向量也都能由 $(I)$ 线性表出，则称两个向量组等价。等价的向量组有相同的秩；反过来秩相同不一定等价（还需能相互表出）。同一向量组的不同极大无关组彼此等价，且都与原向量组等价。",
+    "followups": [
+      "向量组等价和矩阵等价是一回事吗？",
+      "若 $(I)$ 能由 $(II)$ 表出，则 $r(I)\\le r(II)$，怎么理解？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["向量组等价", "线性表出"]
+  },
+  {
+    "id": "aa-041",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch3",
+    "question": "什么是基础解系？",
+    "answer": "设齐次线性方程组 $A\\mathbf{x}=\\boldsymbol{0}$（$A$ 为 $m\\times n$ 矩阵）。若一组解向量 $\\xi_1,\\dots,\\xi_t$ 满足：(1) 每个 $\\xi_i$ 都是方程组的解；(2) 它们线性无关；(3) 方程组的任意一个解都能表示成它们的线性组合，则称 $\\{\\xi_1,\\dots,\\xi_t\\}$ 为该齐次方程组的一个基础解系。基础解系所含向量个数为 $t=n-r(A)$。",
+    "followups": [
+      "为什么基础解系含 $n-r(A)$ 个向量？",
+      "基础解系唯一吗？它和解空间的基是什么关系？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["基础解系", "齐次方程组"]
+  },
+  {
+    "id": "aa-042",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch3",
+    "question": "齐次和非齐次线性方程组的解如何判定？",
+    "answer": "齐次方程组 $A\\mathbf{x}=\\boldsymbol{0}$（$n$ 个未知数）：$r(A)=n$ 时只有零解；$r(A)<n$ 时有无穷多解（含非零解）。非齐次方程组 $A\\mathbf{x}=\\mathbf{b}$：记增广矩阵秩为 $r(\\tilde A)$，则 $r(A)\\ne r(\\tilde A)$ 时无解；$r(A)=r(\\tilde A)=n$ 时有唯一解；$r(A)=r(\\tilde A)<n$ 时有无穷多解。",
+    "followups": [
+      "无穷多解时，自由未知量的个数是多少？",
+      "齐次方程组一定有解吗？"
+    ],
+    "difficulty": "基础",
+    "tags": ["线性方程组", "解的判定", "秩"]
+  },
+  {
+    "id": "aa-043",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch3",
+    "question": "非齐次线性方程组的解有什么结构？",
+    "answer": "若非齐次方程组 $A\\mathbf{x}=\\mathbf{b}$ 有解，则它的通解等于“一个特解”加上“对应齐次方程组 $A\\mathbf{x}=\\boldsymbol{0}$ 的通解”，即 $\\mathbf{x}=\\eta_0+k_1\\xi_1+\\cdots+k_t\\xi_t$，其中 $\\eta_0$ 是一个特解，$\\xi_1,\\dots,\\xi_t$ 是齐次方程组的基础解系。所以非齐次解集是齐次解空间的一个“平移”。",
+    "followups": [
+      "为什么两个特解之差是齐次方程组的解？",
+      "非齐次方程组的解集是子空间吗？为什么不是？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["非齐次方程组", "解的结构"]
+  },
+  {
+    "id": "aa-044",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch3",
+    "question": "线性方程组 $A\\mathbf{x}=\\boldsymbol{0}$ 和 $B\\mathbf{x}=\\boldsymbol{0}$ 同解的充要条件是什么？",
+    "answer": "两个齐次方程组同解的充要条件是 $A$ 与 $B$ 的行向量组等价（可以相互线性表出）。等价的另一种表述：$A$、$B$ 以及把它们上下拼起来的矩阵 $\\begin{pmatrix}A\\\\B\\end{pmatrix}$ 三者有相同的秩。",
+    "followups": [
+      "同解意味着两者解空间相同，这和行向量组等价怎么联系？",
+      "$A\\mathbf{x}=\\boldsymbol0$ 与 $A^TA\\mathbf{x}=\\boldsymbol0$ 同解吗（实矩阵）？"
+    ],
+    "difficulty": "拔高",
+    "tags": ["同解", "齐次方程组", "行向量组"]
+  },
+  {
+    "id": "aa-045",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch4",
+    "question": "什么是矩阵的特征值与特征向量？怎么计算？",
+    "answer": "给定 $n$ 阶方阵 $A$，若存在非零向量 $\\boldsymbol{x}$ 使 $A\\boldsymbol{x}=\\lambda\\boldsymbol{x}$，则称 $\\lambda$ 为 $A$ 的特征值、$\\boldsymbol{x}$ 为对应的特征向量。几何上，特征向量在 $A$ 的作用下只被伸缩、方向不变，$\\lambda$ 是伸缩倍数。计算步骤：先解特征方程 $\\det(\\lambda E-A)=0$ 求出所有 $\\lambda$；再对每个 $\\lambda_i$ 解齐次方程组 $(\\lambda_i E-A)\\boldsymbol{x}=\\boldsymbol{0}$，其基础解系的非零线性组合即为对应的特征向量。",
+    "followups": [
+      "特征向量为什么要求非零？",
+      "同一特征值的特征向量加上零向量构成什么（特征子空间）？"
+    ],
+    "difficulty": "基础",
+    "tags": ["特征值", "特征向量"]
+  },
+  {
+    "id": "aa-046",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch4",
+    "question": "特征值有哪些重要性质？",
+    "answer": "设 $n$ 阶方阵 $A$ 的全体特征值为 $\\lambda_1,\\dots,\\lambda_n$（计重数），则：所有特征值之积等于行列式 $\\prod\\lambda_i=\\det A$；所有特征值之和等于迹 $\\sum\\lambda_i=\\operatorname{tr}A$。此外，若 $\\lambda$ 是 $A$ 的特征值，则 $k\\lambda$、$\\lambda^m$、$f(\\lambda)$ 分别是 $kA$、$A^m$、$f(A)$ 的特征值；$A$ 可逆时 $\\lambda^{-1}$ 是 $A^{-1}$ 的特征值。",
+    "followups": [
+      "由“特征值之积等于行列式”如何说明可逆等价于特征值全非零？",
+      "$A$ 与 $A^T$ 的特征值相同吗？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["特征值", "迹", "行列式"]
+  },
+  {
+    "id": "aa-047",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch4",
+    "question": "不同特征值对应的特征向量有什么关系？",
+    "answer": "矩阵的不同特征值所对应的特征向量一定线性无关。更一般地，若取若干个互不相同的特征值，各自取一组（或几个）线性无关的特征向量合在一起，整体仍线性无关。这正是矩阵可对角化的基础——当能凑齐 $n$ 个线性无关的特征向量时即可对角化。",
+    "followups": [
+      "如何用归纳法证明不同特征值的特征向量线性无关？",
+      "同一特征值可以有多个线性无关的特征向量吗？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["特征向量", "线性无关"]
+  },
+  {
+    "id": "aa-048",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch4",
+    "question": "$n$ 阶矩阵 $A$ 可对角化的充要条件是什么？",
+    "answer": "等价说法：(1) $A$ 相似于一个对角矩阵；(2) $A$ 有 $n$ 个线性无关的特征向量；(3) $A$ 的每个特征值的几何重数都等于其代数重数（即对每个 $\\lambda_i$ 有 $r(\\lambda_i E-A)=n-n_i$，$n_i$ 为代数重数）；(4) $A$ 的最小多项式没有重根。注意：有 $n$ 个不同特征值是可对角化的充分条件，但不必要。",
+    "followups": [
+      "举一个可对角化但特征值有重根的例子",
+      "举一个不可对角化的矩阵（如约当块）"
+    ],
+    "difficulty": "进阶",
+    "tags": ["对角化", "特征值"]
+  },
+  {
+    "id": "aa-049",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch4",
+    "question": "特征值的代数重数和几何重数是什么？有什么关系？",
+    "answer": "代数重数是特征值 $\\lambda$ 作为特征多项式根的重数；几何重数是对应特征子空间的维数，即 $\\dim\\ker(\\lambda E-A)=n-r(\\lambda E-A)$。两者关系：$1\\le$ 几何重数 $\\le$ 代数重数。矩阵可对角化当且仅当每个特征值的几何重数都等于代数重数。",
+    "followups": [
+      "几何重数小于代数重数的矩阵能对角化吗？",
+      "实对称矩阵的几何重数和代数重数为什么一定相等？"
+    ],
+    "difficulty": "拔高",
+    "tags": ["代数重数", "几何重数", "对角化"]
+  },
+  {
+    "id": "aa-050",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch4",
+    "question": "什么是相似矩阵？",
+    "answer": "设 $A,B$ 为 $n$ 阶矩阵，若存在 $n$ 阶可逆矩阵 $P$ 使 $P^{-1}AP=B$，则称 $A$ 与 $B$ 相似。相似是一种等价关系（满足自反、对称、传递）。从几何上看，相似矩阵是同一个线性变换在不同基下的矩阵表示。",
+    "followups": [
+      "相似变换 $P$ 的列向量有什么含义（基的过渡）？",
+      "对角化是相似的特例吗？"
+    ],
+    "difficulty": "基础",
+    "tags": ["相似矩阵"]
+  },
+  {
+    "id": "aa-051",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch4",
+    "question": "相似矩阵有哪些性质（必要条件）？",
+    "answer": "若 $A$ 与 $B$ 相似，则它们有：相同的特征多项式，从而特征值相同（计重数）；相同的秩；相同的行列式；相同的迹；相同的最小多项式；对任意多项式 $f$，$f(A)$ 与 $f(B)$ 也相似。这些都是相似的必要条件，可用来快速否定两个矩阵相似。",
+    "followups": [
+      "这些条件全部满足就能保证相似吗？",
+      "为什么相似矩阵特征多项式相同？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["相似矩阵", "性质"]
+  },
+  {
+    "id": "aa-052",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch4",
+    "question": "特征值相同的两个矩阵一定相似吗？",
+    "answer": "不一定。特征值相同（甚至特征多项式相同）只是相似的必要条件，不充分。经典反例：$\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}$ 与 $\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$ 都只有特征值 $1$（二重），但前者是单位阵、只与自身相似，后者不可对角化，二者不相似。差别在于约当结构（几何重数）不同。",
+    "followups": [
+      "要再加什么条件才能保证相似？",
+      "约当标准形为什么是相似的完全不变量？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["相似矩阵", "特征值"]
+  },
+  {
+    "id": "aa-053",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch4",
+    "question": "加上什么条件可以保证特征值相同的两个矩阵相似？",
+    "answer": "若两个矩阵特征值相同，并且都可对角化，则它们一定相似。因为可对角化时，两者都相似于以这些特征值为对角元的同一个对角矩阵（相差对角元排序），由相似的传递性即得二者相似。特别地，两个实对称矩阵特征值相同就一定相似（实对称必可对角化）。",
+    "followups": [
+      "如果只有一个可对角化、另一个不可对角化呢？",
+      "为什么实对称矩阵一定可对角化？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["相似矩阵", "对角化"]
+  },
+  {
+    "id": "aa-054",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch4",
+    "question": "$A$ 与 $B$ 相似、$C$ 与 $D$ 相似，那么 $A+C$ 与 $B+D$ 相似吗？",
+    "answer": "一般不相似。$A$ 与 $B$ 相似用的相似变换 $P$、$C$ 与 $D$ 相似用的相似变换 $Q$ 通常不同，无法用同一个可逆矩阵同时把 $A+C$ 变成 $B+D$。只有当能用同一个 $P$ 同时实现 $P^{-1}AP=B$ 且 $P^{-1}CP=D$ 时才成立。可以举具体反例验证。",
+    "followups": [
+      "相似矩阵的乘积 $AC$ 与 $BD$ 一定相似吗？",
+      "什么情况下能保证 $A+C$ 与 $B+D$ 相似？"
+    ],
+    "difficulty": "拔高",
+    "tags": ["相似矩阵"]
+  },
+  {
+    "id": "aa-055",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch4",
+    "question": "叙述哈密顿-凯莱（Hamilton-Cayley）定理。",
+    "answer": "哈密顿-凯莱定理：设 $f(\\lambda)=\\det(\\lambda E-A)$ 是 $n$ 阶方阵 $A$ 的特征多项式，则 $f(A)=O$，即矩阵满足自己的特征多项式（特征多项式是 $A$ 的一个零化多项式）。它常用于把高次幂 $A^k$ 降阶表示、求逆矩阵、以及讨论最小多项式（最小多项式整除特征多项式）。",
+    "followups": [
+      "最小多项式和特征多项式有什么关系？",
+      "如何用该定理把 $A^{-1}$ 表示成 $A$ 的多项式？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["哈密顿凯莱定理", "特征多项式"]
+  },
+  {
+    "id": "aa-056",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch4",
+    "question": "对称矩阵和反对称矩阵的定义是什么？",
+    "answer": "对 $n$ 阶方阵 $A$：若 $A^T=A$（即所有 $a_{ij}=a_{ji}$），则称 $A$ 为对称矩阵；若 $A^T=-A$（即所有 $a_{ij}=-a_{ji}$，特别地对角元全为 $0$），则称 $A$ 为反对称矩阵。任意方阵都可唯一分解为一个对称矩阵与一个反对称矩阵之和：$A=\\frac{A+A^T}{2}+\\frac{A-A^T}{2}$。",
+    "followups": [
+      "反对称矩阵的对角元为什么一定是 0？",
+      "奇数阶反对称矩阵的行列式是多少？"
+    ],
+    "difficulty": "基础",
+    "tags": ["对称矩阵", "反对称矩阵"]
+  },
+  {
+    "id": "aa-057",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch4",
+    "question": "实对称矩阵有哪些重要性质？",
+    "answer": "实对称矩阵 $A$ 的性质：(1) 特征值全是实数；(2) 必可对角化，且不同特征值对应的特征向量相互正交；(3) 一定可以正交对角化，即存在正交矩阵 $Q$ 使 $Q^TAQ=Q^{-1}AQ$ 为对角矩阵；(4) 每个特征值的几何重数等于代数重数。这些性质是二次型理论的基石。",
+    "followups": [
+      "如何对一个实对称矩阵求正交矩阵把它对角化？",
+      "为什么实对称矩阵的特征值一定是实数？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["实对称矩阵", "正交对角化"]
+  },
+  {
+    "id": "aa-058",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch4",
+    "question": "为什么实对称矩阵一定可以正交对角化？",
+    "answer": "关键有两步。首先实对称矩阵的特征值都是实数，且不同特征值的特征向量正交（由 $\\lambda_1\\langle x_1,x_2\\rangle=\\langle Ax_1,x_2\\rangle=\\langle x_1,Ax_2\\rangle=\\lambda_2\\langle x_1,x_2\\rangle$，$\\lambda_1\\ne\\lambda_2$ 得内积为零）。其次每个特征值的几何重数等于代数重数，于是能凑出 $n$ 个相互正交的单位特征向量，把它们作列拼成正交矩阵 $Q$，即有 $Q^TAQ=\\Lambda$。",
+    "followups": [
+      "对同一特征值的多个特征向量怎么正交化（施密特）？",
+      "正交对角化与一般对角化的区别是什么？"
+    ],
+    "difficulty": "拔高",
+    "tags": ["实对称矩阵", "正交对角化"]
+  },
+  {
+    "id": "aa-059",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch4",
+    "question": "正交矩阵的定义和性质是什么？",
+    "answer": "定义：$n$ 阶实矩阵 $A$ 若满足 $A^TA=AA^T=E$，则称为正交矩阵。性质：(1) $\\det A=\\pm1$；(2) $A^{-1}=A^T$；(3) 保持内积与长度不变，$(A\\boldsymbol{x},A\\boldsymbol{y})=(\\boldsymbol{x},\\boldsymbol{y})$；(4) 行向量组、列向量组都是 $\\mathbb{R}^n$ 的标准正交基；(5) 实特征值只能是 $\\pm1$。正交矩阵对应保持长度和角度的正交变换（旋转、反射）。",
+    "followups": [
+      "为什么正交矩阵保持长度不变？",
+      "正交矩阵的特征值（含复数）模长是多少？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["正交矩阵"]
+  },
+  {
+    "id": "aa-060",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch4",
+    "question": "正定矩阵的定义是什么？有哪些判定方法？",
+    "answer": "定义：$n$ 阶实对称矩阵 $A$，若对任意非零实向量 $\\boldsymbol{x}$ 都有 $\\boldsymbol{x}^TA\\boldsymbol{x}>0$，则称 $A$ 正定。常用判定方法：(1) 定义法；(2) 顺序主子式法——所有顺序主子式（左上角各阶子式）都大于 $0$；(3) 特征值法——所有特征值都大于 $0$；(4) 分解法——存在可逆实矩阵 $P$ 使 $A=P^TP$；(5) 主子式法——所有主子式（行列下标相同的子式）都大于 $0$。",
+    "followups": [
+      "正定矩阵的行列式和对角元有什么符号特点？",
+      "顺序主子式法和全部主子式法有何区别？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["正定矩阵", "判定方法"]
+  },
+  {
+    "id": "aa-061",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch4",
+    "question": "半正定矩阵的定义和性质是什么？",
+    "answer": "定义：$n$ 阶实对称矩阵 $A$，若对任意 $n$ 维实向量 $\\boldsymbol{x}$ 都有 $\\boldsymbol{x}^TA\\boldsymbol{x}\\ge0$，则称 $A$ 为半正定矩阵。性质：它的所有特征值都非负；所有顺序主子式非负（注意半正定需要全部主子式非负，仅顺序主子式非负不够）；可写成 $A=B^TB$ 的形式。",
+    "followups": [
+      "为什么半正定只要求“全部主子式”非负而非“顺序主子式”非负就能保证？",
+      "$A^TA$ 一定是半正定的吗？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["半正定矩阵"]
+  },
+  {
+    "id": "aa-062",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch4",
+    "question": "什么是合同矩阵？",
+    "answer": "若存在可逆矩阵 $C$ 使得 $C^TAC=B$，则称方阵 $A$ 合同于 $B$。合同是研究二次型的核心等价关系——同一个二次型在不同（可逆）线性替换下的矩阵互相合同。注意合同用的是 $C^T(\\cdot)C$，与相似的 $P^{-1}(\\cdot)P$ 不同。",
+    "followups": [
+      "合同和相似的定义差别在哪？",
+      "二次型经过可逆线性替换，矩阵之间是什么关系？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["合同矩阵", "二次型"]
+  },
+  {
+    "id": "aa-063",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch4",
+    "question": "矩阵合同保持什么不变？",
+    "answer": "合同变换保持：秩、正惯性指数、负惯性指数（从而符号差）、正定性（正定、半正定等类型不变）、以及行列式的正负号（因为 $\\det(C^TAC)=(\\det C)^2\\det A$，$(\\det C)^2>0$）。但合同一般不保持特征值、行列式的具体数值、迹。",
+    "followups": [
+      "惯性定理说的是什么？",
+      "为什么合同保持行列式的正负但不保持其数值？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["合同矩阵", "惯性指数"]
+  },
+  {
+    "id": "aa-064",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch4",
+    "question": "合同一定相似吗？相似一定合同吗？",
+    "answer": "一般地，合同不一定相似，相似也不一定合同（相似保特征值、合同保惯性指数，两者关注点不同）。但对实对称矩阵有重要结论：两个实对称矩阵若相似则一定合同（相似 $\\Rightarrow$ 特征值相同 $\\Rightarrow$ 正负惯性指数相同 $\\Rightarrow$ 合同）。可概括为：在实对称范围内，相似是合同的充分条件。",
+    "followups": [
+      "为什么实对称矩阵相似就能推出合同？",
+      "合同的实对称矩阵一定相似吗？"
+    ],
+    "difficulty": "拔高",
+    "tags": ["合同矩阵", "相似矩阵"]
+  },
+  {
+    "id": "aa-065",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch4",
+    "question": "化简二次型有哪些常用方法？",
+    "answer": "三种常用方法：(1) 配方法——通过配完全平方逐步消去交叉项，得到标准形；(2) 初等变换法（合同变换）——对二次型矩阵同时做行、列同种初等变换化为对角形；(3) 正交变换法——利用实对称矩阵可正交对角化，用正交矩阵把二次型化为标准形，此法保持几何度量（长度、角度），常用于二次曲面分类。",
+    "followups": [
+      "正交变换法和配方法得到的标准形会一样吗？规范形呢？",
+      "为什么正交变换法能保持图形的几何形状？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["二次型", "化简"]
+  },
+  {
+    "id": "aa-066",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch4",
+    "question": "什么是二次型的正负惯性指数、规范形和符号差？",
+    "answer": "把实二次型化为只含平方项的标准形后，系数为正的平方项个数 $p$ 称为正惯性指数，系数为负的个数 $q$ 称为负惯性指数，$p+q$ 等于二次型的秩。规范形是进一步把非零系数都化为 $\\pm1$ 的标准形 $y_1^2+\\cdots+y_p^2-y_{p+1}^2-\\cdots-y_{p+q}^2$。符号差为 $p-q$。惯性定理保证 $p,q$ 与化简方法无关，是合同的完全不变量。",
+    "followups": [
+      "惯性定理（Sylvester 惯性律）为什么重要？",
+      "两个实二次型合同的充要条件是什么（秩与正惯性指数都相同）？"
+    ],
+    "difficulty": "拔高",
+    "tags": ["二次型", "惯性指数", "规范形"]
+  },
+  {
+    "id": "aa-067",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch5",
+    "question": "线性空间的定义是什么？",
+    "answer": "设 $\\mathbb{F}$ 是一个域，$V$ 是一个非空集合。在 $V$ 上定义加法（$V\\times V\\to V$）和数乘（$\\mathbb{F}\\times V\\to V$）两种封闭运算，若它们满足八条公理——加法交换律、加法结合律、存在零元、存在负元、数乘对向量加法的分配律、数乘对标量加法的分配律、数乘结合律 $(ab)v=a(bv)$、数乘单位元 $1v=v$，则称 $V$ 为域 $\\mathbb{F}$ 上的线性空间（向量空间）。",
+    "followups": [
+      "举几个线性空间的例子（如多项式空间、矩阵空间、函数空间）",
+      "为什么强调运算要“封闭”？"
+    ],
+    "difficulty": "基础",
+    "tags": ["线性空间", "定义"]
+  },
+  {
+    "id": "aa-068",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch5",
+    "question": "如何判断一个子集是否为子空间？",
+    "answer": "设 $W$ 是线性空间 $V$ 的非空子集。$W$ 是子空间当且仅当它对加法和数乘封闭，即对任意 $\\boldsymbol{u},\\boldsymbol{v}\\in W$ 和任意标量 $k$，都有 $\\boldsymbol{u}+\\boldsymbol{v}\\in W$、$k\\boldsymbol{u}\\in W$（等价地：对线性组合封闭）。由此可推出 $W$ 必含零向量。常见子空间有：齐次方程组的解空间、由一组向量张成的子空间、线性变换的核与值域等。",
+    "followups": [
+      "为什么子空间一定包含零向量？",
+      "判定子空间时最容易忽略哪一条？"
+    ],
+    "difficulty": "基础",
+    "tags": ["子空间", "判定"]
+  },
+  {
+    "id": "aa-069",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch5",
+    "question": "线性空间的维数是怎么定义的？",
+    "answer": "若在线性空间 $V$ 中存在 $n$ 个线性无关的向量，而任意 $n+1$ 个向量都线性相关，则称 $V$ 是 $n$ 维线性空间，记 $\\dim V=n$。等价地，维数就是 $V$ 的一组基所含向量的个数。若 $V$ 中存在任意多个线性无关向量，则称它是无限维的。",
+    "followups": [
+      "维数和基所含向量个数为什么一致？",
+      "举一个无限维线性空间的例子"
+    ],
+    "difficulty": "基础",
+    "tags": ["维数", "线性空间"]
+  },
+  {
+    "id": "aa-070",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch5",
+    "question": "线性空间的基唯一吗？不同基之间有什么联系？",
+    "answer": "基不唯一——任何一组既线性无关又能生成整个空间的向量都可作为基。不同基之间通过过渡矩阵联系：设 $\\mathcal{B}_1=\\{\\alpha_1,\\dots,\\alpha_n\\}$、$\\mathcal{B}_2=\\{\\beta_1,\\dots,\\beta_n\\}$ 是两组基，把每个 $\\beta_j$ 用 $\\mathcal{B}_1$ 表出，写成矩阵形式 $(\\beta_1,\\dots,\\beta_n)=(\\alpha_1,\\dots,\\alpha_n)A$，其中 $A$ 称为从 $\\mathcal{B}_1$ 到 $\\mathcal{B}_2$ 的过渡矩阵，它必为可逆矩阵。",
+    "followups": [
+      "向量在两组基下的坐标如何通过过渡矩阵换算？",
+      "过渡矩阵为什么一定可逆？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["基", "过渡矩阵"]
+  },
+  {
+    "id": "aa-071",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch5",
+    "question": "线性空间的维数公式是什么？",
+    "answer": "设 $W_1,W_2$ 是线性空间 $V$ 的两个子空间，则有维数公式：$\\dim W_1+\\dim W_2=\\dim(W_1+W_2)+\\dim(W_1\\cap W_2)$。它刻画了两个子空间的和与交在维数上的关系，类似集合容斥原理。当 $W_1\\cap W_2=\\{\\boldsymbol{0}\\}$ 时，和为直和，此时 $\\dim(W_1\\oplus W_2)=\\dim W_1+\\dim W_2$。",
+    "followups": [
+      "什么时候 $W_1+W_2$ 是直和？",
+      "三个子空间有类似的维数公式吗？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["维数公式", "子空间"]
+  },
+  {
+    "id": "aa-072",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch5",
+    "question": "子空间的交与并仍是子空间吗？",
+    "answer": "子空间的交仍是子空间（对加法、数乘都封闭）。但子空间的并一般不是子空间，因为它可能不满足加法封闭性——分别取自两个子空间的向量之和未必仍落在并集中。例如 $\\mathbb{R}^2$ 中两条过原点的不同直线，各自是子空间，但它们的并集对加法不封闭。两个子空间的并是子空间当且仅当其中一个包含另一个。",
+    "followups": [
+      "用什么运算代替并集才能得到子空间（和空间）？",
+      "什么时候 $W_1\\cup W_2$ 恰好是子空间？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["子空间", "交与并"]
+  },
+  {
+    "id": "aa-073",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch5",
+    "question": "什么是直和？判定直和的充要条件是什么？",
+    "answer": "设 $W_1,\\dots,W_s$ 是 $V$ 的子空间，若它们的和 $W=W_1+\\cdots+W_s$ 中每个元素的分解 $\\alpha=\\alpha_1+\\cdots+\\alpha_s$（$\\alpha_i\\in W_i$）都唯一，则称 $W$ 为直和，记 $W=W_1\\oplus\\cdots\\oplus W_s$。对两个子空间，$W_1+W_2$ 为直和的充要条件（三者等价）：(1) $W_1\\cap W_2=\\{\\boldsymbol{0}\\}$；(2) 零向量的分解唯一；(3) $\\dim(W_1+W_2)=\\dim W_1+\\dim W_2$。",
+    "followups": [
+      "多个子空间的直和判定为什么不能只看两两交为零？",
+      "直和与维数公式怎么联系？"
+    ],
+    "difficulty": "拔高",
+    "tags": ["直和", "子空间"]
+  },
+  {
+    "id": "aa-074",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch5",
+    "question": "给线性空间的直和举一个例子。",
+    "answer": "全体 $n$ 阶实矩阵构成的空间 $M_n(\\mathbb{R})$，可分解为对称矩阵子空间 $S$ 与反对称矩阵子空间 $K$ 的直和：$M_n(\\mathbb{R})=S\\oplus K$。因为任意方阵都能唯一写成对称部分 $\\frac{A+A^T}{2}$ 加反对称部分 $\\frac{A-A^T}{2}$，且 $S\\cap K=\\{O\\}$。",
+    "followups": [
+      "$\\dim S$ 和 $\\dim K$ 各是多少？相加是否等于 $n^2$？",
+      "再举一个直和的例子（如 $\\mathbb{R}^n$ 分成某子空间与其正交补）"
+    ],
+    "difficulty": "进阶",
+    "tags": ["直和", "对称矩阵", "反对称矩阵"]
+  },
+  {
+    "id": "aa-075",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch5",
+    "question": "线性空间同构的定义是什么？",
+    "answer": "设 $V$ 与 $V'$ 都是域 $\\mathbb{F}$ 上的线性空间。若存在 $V$ 到 $V'$ 的一个双射 $\\sigma$，且 $\\sigma$ 保持加法与数乘，即 $\\sigma(\\alpha+\\beta)=\\sigma(\\alpha)+\\sigma(\\beta)$、$\\sigma(k\\alpha)=k\\sigma(\\alpha)$，则称 $\\sigma$ 为同构映射，$V$ 与 $V'$ 同构，记 $V\\cong V'$。同构意味着两个空间在结构上完全相同，只是元素的“名字”不同。",
+    "followups": [
+      "同构映射把零向量映到什么？把线性无关组映成什么？",
+      "$n$ 维实线性空间都同构于 $\\mathbb{R}^n$ 吗？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["同构", "线性空间"]
+  },
+  {
+    "id": "aa-076",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch5",
+    "question": "两个有限维线性空间同构的充要条件是什么？",
+    "answer": "域 $\\mathbb{F}$ 上两个有限维线性空间同构的充要条件是它们的维数相等。所以维数是有限维线性空间在同构意义下的完全不变量——任何 $n$ 维 $\\mathbb{F}$-线性空间都同构于标准空间 $\\mathbb{F}^n$。这就是为什么研究抽象线性空间常可归结为研究坐标向量空间。",
+    "followups": [
+      "为什么维数相等就能建立同构？",
+      "$2\\times3$ 实矩阵空间与 $\\mathbb{R}^6$ 同构吗？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["同构", "维数"]
+  },
+  {
+    "id": "aa-077",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch5",
+    "question": "线性变换的概念是什么？",
+    "answer": "设 $V$ 和 $W$ 是数域 $P$ 上的线性空间，映射 $T:V\\to W$ 若满足：(1) 保持加法 $T(\\alpha+\\beta)=T(\\alpha)+T(\\beta)$；(2) 保持数乘 $T(k\\alpha)=kT(\\alpha)$，则称 $T$ 为从 $V$ 到 $W$ 的线性变换（线性映射）。当 $V=W$ 时称为 $V$ 上的线性变换。线性变换是保持线性结构的映射。",
+    "followups": [
+      "线性变换把零向量映到哪里？",
+      "求导、积分是不是线性变换？"
+    ],
+    "difficulty": "基础",
+    "tags": ["线性变换", "定义"]
+  },
+  {
+    "id": "aa-078",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch5",
+    "question": "线性变换和矩阵有什么关系？",
+    "answer": "在取定基之后，每个线性变换都唯一对应一个矩阵，矩阵的列就是基向量的像在该基下的坐标；反过来，给定矩阵也确定了一个线性变换。于是有限维空间上的线性变换运算（复合、求逆等）就对应矩阵运算（乘法、求逆），抽象的变换问题被转化为具体的矩阵计算。",
+    "followups": [
+      "线性变换的复合对应矩阵的什么运算？",
+      "可逆线性变换对应什么矩阵？"
+    ],
+    "difficulty": "基础",
+    "tags": ["线性变换", "矩阵"]
+  },
+  {
+    "id": "aa-079",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch5",
+    "question": "同一线性变换在不同基下的矩阵之间是什么关系？",
+    "answer": "是相似关系。同一个线性变换在两组不同基下的矩阵 $A$ 与 $B$ 满足 $B=P^{-1}AP$，其中 $P$ 是两组基之间的过渡矩阵。反过来，相似的矩阵必定是同一个线性变换在不同基下的矩阵表示。这正是“相似”这一概念的来源。",
+    "followups": [
+      "过渡矩阵 $P$ 在这里扮演什么角色？",
+      "为什么选取合适的基能让变换的矩阵变成对角形？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["线性变换", "相似矩阵", "基"]
+  },
+  {
+    "id": "aa-080",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch5",
+    "question": "从线性变换的角度怎么解释相似矩阵？",
+    "answer": "相似矩阵可以看作同一个线性变换在两个不同基下的矩阵表达。换基不改变变换本身，只改变它的“坐标描述”，所以相似矩阵共享一切与基无关的内在量——特征值、迹、行列式、秩等。寻找让矩阵最简单（如对角形、约当形）的基，本质上就是寻找线性变换最自然的“观察角度”。",
+    "followups": [
+      "为什么相似不变量都是线性变换的“内在”属性？",
+      "对角化在这个视角下意味着什么？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["相似矩阵", "线性变换"]
+  },
+  {
+    "id": "aa-081",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch5",
+    "question": "线性变换的特征值与特征向量是什么？",
+    "answer": "设 $V$ 是数域 $\\mathbb{P}$ 上的线性空间，$\\mathcal{A}:V\\to V$ 是线性变换。若存在数 $\\lambda_0\\in\\mathbb{P}$ 和非零向量 $\\xi\\in V$，使 $\\mathcal{A}(\\xi)=\\lambda_0\\xi$，则称 $\\lambda_0$ 为 $\\mathcal{A}$ 的特征值，$\\xi$ 为属于 $\\lambda_0$ 的特征向量。它与矩阵特征值一致：取定基后，线性变换的特征值就是其矩阵的特征值。",
+    "followups": [
+      "线性变换的特征值依赖于所选的基吗？",
+      "特征子空间是不变子空间吗？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["线性变换", "特征值"]
+  },
+  {
+    "id": "aa-082",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch5",
+    "question": "线性变换的值域和核是什么？两者有何关系？",
+    "answer": "设 $\\sigma:V\\to V$ 是线性变换。值域（像空间）是 $V$ 中所有向量的像构成的集合 $\\operatorname{Im}\\sigma=\\{\\sigma(\\alpha):\\alpha\\in V\\}$；核是被映为零向量的全体 $\\ker\\sigma=\\{\\alpha:\\sigma(\\alpha)=\\boldsymbol{0}\\}$。两者都是子空间，且满足秩-零化度定理：$\\dim\\operatorname{Im}\\sigma+\\dim\\ker\\sigma=\\dim V=n$。",
+    "followups": [
+      "值域的维数（秩）和对应矩阵的秩什么关系？",
+      "$\\sigma$ 是单射、满射分别等价于核、值域的什么条件？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["线性变换", "值域", "核", "秩零化度"]
+  },
+  {
+    "id": "aa-083",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch5",
+    "question": "什么是不变子空间？",
+    "answer": "设 $\\sigma$ 是线性空间 $V$ 上的线性变换，$W$ 是 $V$ 的子空间。若 $W$ 中任意向量在 $\\sigma$ 作用后仍属于 $W$，即 $\\sigma(W)\\subseteq W$，则称 $W$ 是 $\\sigma$ 的不变子空间。不变子空间使得 $\\sigma$ 限制在 $W$ 上仍是 $W$ 上的线性变换，是把大空间分解、把矩阵化简（分块、约当形）的关键工具。",
+    "followups": [
+      "找到不变子空间对化简变换的矩阵有什么帮助？",
+      "一维不变子空间和特征向量有什么联系？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["不变子空间", "线性变换"]
+  },
+  {
+    "id": "aa-084",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch5",
+    "question": "有哪些常见的不变子空间？",
+    "answer": "常见的有：(1) 整个空间 $V$ 和零子空间 $\\{\\boldsymbol{0}\\}$（对任何 $\\sigma$ 都不变）；(2) 值域 $\\operatorname{Im}\\sigma$ 和核 $\\ker\\sigma$；(3) 每个特征值对应的特征子空间 $V_\\lambda$；(4) 若线性变换 $\\sigma$ 与 $\\tau$ 可交换，则 $\\tau$ 的值域与核都是 $\\sigma$ 的不变子空间。这些是构造不变子空间分解的基本素材。",
+    "followups": [
+      "为什么特征子空间一定是不变子空间？",
+      "可交换变换为什么能保持彼此的核与值域不变？"
+    ],
+    "difficulty": "拔高",
+    "tags": ["不变子空间", "特征子空间"]
+  },
+  {
+    "id": "aa-085",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch5",
+    "question": "正交变换在任意一组基下的矩阵都是正交矩阵吗？",
+    "answer": "不是。正交变换（保持内积的线性变换）只有在标准正交基下的矩阵才一定是正交矩阵；在一般（非标准正交）基下，它的矩阵未必满足 $A^TA=E$。这是因为“正交矩阵”这一刻画依赖于度量，而度量的标准形式只在标准正交基下成立。",
+    "followups": [
+      "正交变换的几何意义是什么（保长保角）？",
+      "对称变换在标准正交基下对应什么矩阵？"
+    ],
+    "difficulty": "拔高",
+    "tags": ["正交变换", "正交矩阵", "标准正交基"]
+  },
+  {
+    "id": "aa-086",
+    "courseId": "advanced-algebra",
+    "chapterId": "aa-ch5",
+    "question": "向量组标准正交化的方法是什么？",
+    "answer": "用施密特（Schmidt）正交化方法。设 $\\alpha_1,\\dots,\\alpha_n$ 是内积空间中一组线性无关向量。先正交化：令 $\\beta_1=\\alpha_1$，$\\beta_2=\\alpha_2-\\dfrac{(\\alpha_2,\\beta_1)}{(\\beta_1,\\beta_1)}\\beta_1$，一般地 $\\beta_k=\\alpha_k-\\sum_{i=1}^{k-1}\\dfrac{(\\alpha_k,\\beta_i)}{(\\beta_i,\\beta_i)}\\beta_i$；再单位化：令 $\\gamma_i=\\dfrac{\\beta_i}{|\\beta_i|}$，得到一组标准正交向量组 $\\gamma_1,\\dots,\\gamma_n$。",
+    "followups": [
+      "每一步减去的那一项的几何含义是什么（投影）？",
+      "施密特正交化和 QR 分解有什么联系？"
+    ],
+    "difficulty": "进阶",
+    "tags": ["施密特正交化", "标准正交基"]
+  }
+]

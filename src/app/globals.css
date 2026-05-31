@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+/* Enable class-based dark mode for Tailwind v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---- Semantic color variables ---- */
+:root {
+  --bg-page:     #FAFAF8;
+  --bg-card:     #FFFFFF;
+  --fg-main:     #2D2D2D;
+  --fg-muted:    #6B7280;
+  --border-col:  #E5E7EB;
+  --primary:     #0F4C5C;
+  --primary-btn: #1A6B7A;
+}
+
+.dark {
+  --bg-page:     #1A1D23;
+  --bg-card:     #23272F;
+  --fg-main:     #E5E7EB;
+  --fg-muted:    #9CA3AF;
+  --border-col:  #374151;
+  --primary:     #5BA3B5;
+  --primary-btn: #5BA3B5;
+}
+
+/* ---- Tailwind design tokens (inline = resolved at runtime via CSS vars) ---- */
+@theme inline {
+  --color-page:        var(--bg-page);
+  --color-card:        var(--bg-card);
+  --color-fg:          var(--fg-main);
+  --color-muted:       var(--fg-muted);
+  --color-border:      var(--border-col);
+  --color-primary:     var(--primary);
+  --color-primary-btn: var(--primary-btn);
+
+  --font-sans: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ---- Base ---- */
+html {
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg-page);
+  color: var(--fg-main);
+  font-family: var(--font-sans);
+}
+
+/* ---- Prose content (answers) ---- */
+.prose-content p { margin-bottom: 0.75em; }
+
+.prose-content strong {
+  font-weight: 600;
+  color: var(--fg-main);
+}
+
+.prose-content ul,
+.prose-content ol {
+  margin: 0.4em 0 0.75em 1.5em;
+}
+
+.prose-content li { margin-bottom: 0.2em; }
+
+.prose-content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  font-size: 0.9rem;
+}
+
+.prose-content th,
+.prose-content td {
+  border: 1px solid var(--border-col);
+  padding: 0.4em 0.75em;
+  text-align: left;
+}
+
+.prose-content th {
+  background-color: var(--bg-page);
+  font-weight: 600;
+}
+
+/* ---- KaTeX display math ---- */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5em 0;
+}
+
+/* ---- Answer collapse animation ---- */
+.answer-collapse {
+  overflow: hidden;
+  transition: max-height 250ms ease, opacity 200ms ease;
+}
