@@ -1,11 +1,26 @@
-'use client'
-import Link from 'next/link'
-import { useTheme } from './ThemeProvider'
-import { useAuth } from '@/contexts/AuthContext'
-import { useState } from 'react'
-import { getAllCourses } from '@/lib/data'
-import { supabase } from '@/lib/supabase'
-import { useRouter } from 'next/navigation'
+﻿'use client'
+
+import Link from "next/link"
+import { useEffect, useState } from "react"
+import { usePathname, useRouter } from "next/navigation"
+import { getAllCourses } from "@/lib/data"
+import { useTheme } from "./ThemeProvider"
+import { useAuth } from "@/contexts/AuthContext"
+import { supabase } from "@/lib/supabase"
+import { cn } from "@/lib/utils"
+import { CommandPalette } from "./CommandPalette"
+import {
+  BarChartIcon,
+  BookmarkIcon,
+  CommandIcon,
+  MenuIcon,
+  MoonIcon,
+  SearchIcon,
+  ShuffleIcon,
+  SigmaIcon,
+  SunIcon,
+  XIcon,
+} from "./icons"
 
 const courses = getAllCourses()
 
@@ -14,139 +29,204 @@ export function NavBar() {
   const { user, profile, loading } = useAuth()
   const [menuOpen, setMenuOpen] = useState(false)
   const [userMenuOpen, setUserMenuOpen] = useState(false)
+  const [commandOpen, setCommandOpen] = useState(false)
+  const pathname = usePathname()
   const router = useRouter()
+
+
+
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault()
+        setCommandOpen((v) => !v)
+      }
+      if (e.key === "/" && !(e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement)) {
+        e.preventDefault()
+        setCommandOpen(true)
+      }
+    }
+    window.addEventListener("keydown", onKeyDown)
+    return () => window.removeEventListener("keydown", onKeyDown)
+  }, [])
 
   async function handleSignOut() {
     await supabase.auth.signOut()
     setUserMenuOpen(false)
-    router.push('/')
+    router.push("/")
   }
 
   return (
-    <header className="sticky top-0 z-40 bg-card/90 backdrop-blur border-b border-border">
-      <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 font-bold text-primary text-lg shrink-0">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-          </svg>
-          <span className="hidden sm:inline">保研统计备考站</span>
-          <span className="sm:hidden">备考站</span>
+    <header className="sticky top-0 z-50 border-b border-border/70 bg-page/80 backdrop-blur-xl">
+      <div className="container-page flex h-16 items-center justify-between gap-4">
+        <Link href="/" className="group flex min-w-0 items-center gap-3">
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-white shadow-soft transition-transform duration-300 group-hover:-rotate-3">
+            <SigmaIcon size={19} />
+          </span>
+          <span className="min-w-0">
+            <span className="block truncate text-[15px] font-semibold tracking-tight text-fg">统计面试题库</span>
+            <span className="block text-[10px] font-semibold uppercase tracking-[0.18em] text-faint">Stat Prep</span>
+          </span>
         </Link>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-5 text-sm text-muted">
-          {courses.map((c) => (
-            <Link key={c.id} href={`/course/${c.id}`} className="hover:text-primary transition-colors duration-150">
-              {c.title}
-            </Link>
-          ))}
-          <Link href="/quiz" className="hover:text-primary transition-colors duration-150">随机抽题</Link>
-          <Link href="/search" className="hover:text-primary transition-colors duration-150">搜索</Link>
+        <nav className="hidden items-center gap-1 lg:flex">
+          {courses.map((course) => {
+            const active = pathname.startsWith("/course/" + course.id)
+            return (
+              <Link
+                key={course.id}
+                href={"/course/" + course.id}
+                className={cn(
+                  "rounded-lg px-3 py-2 text-sm transition-colors",
+                  active ? "bg-subtle text-fg" : "text-muted hover:bg-subtle hover:text-fg",
+                )}
+              >
+                {course.title}
+              </Link>
+            )
+          })}
+          <Link
+            href="/quiz"
+            className={cn(
+              "rounded-lg px-3 py-2 text-sm transition-colors",
+              pathname === "/quiz" ? "bg-subtle text-fg" : "text-muted hover:bg-subtle hover:text-fg",
+            )}
+          >
+            随机抽题
+          </Link>
           {user && (
             <>
-              <Link href="/review" className="hover:text-primary transition-colors duration-150">复习</Link>
-              <Link href="/dashboard" className="hover:text-primary transition-colors duration-150">统计</Link>
+              <Link
+                href="/review"
+                className={cn(
+                  "rounded-lg px-3 py-2 text-sm transition-colors",
+                  pathname === "/review" ? "bg-subtle text-fg" : "text-muted hover:bg-subtle hover:text-fg",
+                )}
+              >
+                今日复习
+              </Link>
+              <Link
+                href="/dashboard"
+                className={cn(
+                  "rounded-lg px-3 py-2 text-sm transition-colors",
+                  pathname === "/dashboard" ? "bg-subtle text-fg" : "text-muted hover:bg-subtle hover:text-fg",
+                )}
+              >
+                学习统计
+              </Link>
             </>
           )}
         </nav>
 
-        <div className="flex items-center gap-2">
-          {/* Dark mode toggle */}
+        <div className="flex items-center gap-1.5">
           <button
-            onClick={toggle}
-            aria-label="切换深色/浅色模式"
-            className="w-9 h-9 flex items-center justify-center rounded-lg text-muted hover:text-fg hover:bg-page transition-all duration-150"
+            onClick={() => setCommandOpen(true)}
+            className="hidden items-center gap-2 rounded-xl border border-border bg-card px-3 py-2 text-sm text-muted shadow-soft transition-colors hover:border-border-strong hover:text-fg sm:flex"
           >
-            {theme === 'dark' ? (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="4"/>
-                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
-              </svg>
-            ) : (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-              </svg>
-            )}
+            <SearchIcon size={15} />
+            <span>搜索</span>
+            <kbd className="rounded border border-border bg-subtle px-1.5 py-0.5 text-[10px] font-medium text-faint">⌘K</kbd>
           </button>
 
-          {/* Auth area */}
+          <button
+            onClick={() => setCommandOpen(true)}
+            aria-label="搜索"
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-muted transition-colors hover:bg-subtle hover:text-fg sm:hidden"
+          >
+            <SearchIcon size={18} />
+          </button>
+
+          <button
+            onClick={toggle}
+            aria-label="切换深浅色"
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-muted transition-colors hover:bg-subtle hover:text-fg"
+          >
+            {theme === "dark" ? <SunIcon size={18} /> : <MoonIcon size={18} />}
+          </button>
+
           {!loading && (
             user ? (
               <div className="relative">
                 <button
-                  onClick={() => setUserMenuOpen(v => !v)}
-                  className="flex items-center gap-1.5 text-sm text-fg font-medium px-3 py-1.5 rounded-lg hover:bg-page transition-colors"
+                  onClick={() => setUserMenuOpen((v) => !v)}
+                  className="flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-sm text-fg transition-colors hover:bg-subtle"
                 >
-                  <span className="w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold">
-                    {(profile?.username ?? user.email ?? '?')[0].toUpperCase()}
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary-soft text-xs font-bold text-primary">
+                    {(profile?.username ?? user.email ?? "?")[0].toUpperCase()}
                   </span>
-                  <span className="hidden sm:inline max-w-[80px] truncate">{profile?.username ?? '我'}</span>
+                  <span className="hidden max-w-[76px] truncate md:inline">{profile?.username ?? "我"}</span>
                 </button>
                 {userMenuOpen && (
-                  <div className="absolute right-0 top-10 bg-card border border-border rounded-xl shadow-lg py-1 w-36 z-50 text-sm">
-                    <Link href="/dashboard" onClick={() => setUserMenuOpen(false)} className="block px-4 py-2 text-fg hover:bg-page">学习统计</Link>
-                    <Link href="/review" onClick={() => setUserMenuOpen(false)} className="block px-4 py-2 text-fg hover:bg-page">今日复习</Link>
-                    <Link href="/bookmarks" onClick={() => setUserMenuOpen(false)} className="block px-4 py-2 text-fg hover:bg-page">收藏夹</Link>
-                    <Link href="/auth/account" onClick={() => setUserMenuOpen(false)} className="block px-4 py-2 text-fg hover:bg-page">账号设置</Link>
-                    <hr className="border-border my-1" />
-                    <button onClick={handleSignOut} className="w-full text-left px-4 py-2 text-rose-500 hover:bg-page">退出登录</button>
+                  <div className="absolute right-0 top-11 w-40 rounded-xl border border-border bg-card py-1.5 shadow-lift animate-rise">
+                    <Link href="/dashboard" onClick={() => setUserMenuOpen(false)} className="flex items-center gap-2 px-4 py-2 text-sm text-fg hover:bg-subtle">
+                      <BarChartIcon size={15} /> 学习统计
+                    </Link>
+                    <Link href="/review" onClick={() => setUserMenuOpen(false)} className="flex items-center gap-2 px-4 py-2 text-sm text-fg hover:bg-subtle">
+                      <ShuffleIcon size={15} /> 今日复习
+                    </Link>
+                    <Link href="/bookmarks" onClick={() => setUserMenuOpen(false)} className="flex items-center gap-2 px-4 py-2 text-sm text-fg hover:bg-subtle">
+                      <BookmarkIcon size={15} /> 收藏夹
+                    </Link>
+                    <Link href="/auth/account" onClick={() => setUserMenuOpen(false)} className="flex items-center gap-2 px-4 py-2 text-sm text-fg hover:bg-subtle">
+                      <CommandIcon size={15} /> 账号设置
+                    </Link>
+                    <div className="my-1 border-t border-border" />
+                    <button onClick={handleSignOut} className="w-full px-4 py-2 text-left text-sm text-danger hover:bg-subtle">
+                      退出登录
+                    </button>
                   </div>
                 )}
               </div>
             ) : (
               <div className="flex items-center gap-1">
-                <Link href="/auth/login" className="text-sm text-muted hover:text-fg px-3 py-1.5 rounded-lg hover:bg-page transition-colors">登录</Link>
-                <Link href="/auth/register" className="text-sm bg-primary-btn text-white px-3 py-1.5 rounded-lg hover:opacity-90 transition-opacity">注册</Link>
+                <Link href="/auth/login" className="rounded-lg px-3 py-2 text-sm text-muted transition-colors hover:bg-subtle hover:text-fg">
+                  登录
+                </Link>
+                <Link href="/auth/register" className="rounded-lg bg-accent px-3 py-2 text-sm font-medium text-white shadow-soft transition-colors hover:bg-accent-strong">
+                  注册
+                </Link>
               </div>
             )
           )}
 
-          {/* Mobile hamburger */}
           <button
             onClick={() => setMenuOpen((v) => !v)}
             aria-label="菜单"
-            className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg text-muted hover:text-fg hover:bg-page transition-all duration-150"
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-muted transition-colors hover:bg-subtle hover:text-fg lg:hidden"
           >
-            {menuOpen ? (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M18 6 6 18M6 6l12 12"/>
-              </svg>
-            ) : (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 6h16M4 12h16M4 18h16"/>
-              </svg>
-            )}
+            {menuOpen ? <XIcon size={19} /> : <MenuIcon size={19} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden border-t border-border bg-card px-4 py-3 flex flex-col gap-3 text-sm">
-          {courses.map((c) => (
-            <Link key={c.id} href={`/course/${c.id}`} onClick={() => setMenuOpen(false)} className="text-muted hover:text-primary transition-colors">
-              {c.title}
-            </Link>
-          ))}
-          <Link href="/quiz" onClick={() => setMenuOpen(false)} className="text-muted hover:text-primary transition-colors">随机抽题</Link>
-          <Link href="/search" onClick={() => setMenuOpen(false)} className="text-muted hover:text-primary transition-colors">搜索</Link>
-          <Link href="/bookmarks" onClick={() => setMenuOpen(false)} className="text-muted hover:text-primary transition-colors">收藏</Link>
-          {user ? (
-            <>
-              <Link href="/review" onClick={() => setMenuOpen(false)} className="text-muted hover:text-primary transition-colors">今日复习</Link>
-              <Link href="/dashboard" onClick={() => setMenuOpen(false)} className="text-muted hover:text-primary transition-colors">学习统计</Link>
-              <Link href="/auth/account" onClick={() => setMenuOpen(false)} className="text-muted hover:text-primary transition-colors">账号设置</Link>
-            </>
-          ) : (
-            <>
-              <Link href="/auth/login" onClick={() => setMenuOpen(false)} className="text-primary font-medium">登录</Link>
-              <Link href="/auth/register" onClick={() => setMenuOpen(false)} className="text-primary font-medium">注册</Link>
-            </>
-          )}
+        <div className="border-t border-border bg-card px-4 py-3 lg:hidden animate-fade">
+          <nav className="grid gap-1">
+            {courses.map((course) => (
+              <Link key={course.id} href={"/course/" + course.id} onClick={() => setMenuOpen(false)} className="rounded-lg px-3 py-2.5 text-sm text-muted hover:bg-subtle hover:text-fg">
+                {course.title}
+              </Link>
+            ))}
+            <div className="my-1 border-t border-border" />
+            <Link href="/quiz" onClick={() => setMenuOpen(false)} className="rounded-lg px-3 py-2.5 text-sm text-muted hover:bg-subtle hover:text-fg">随机抽题</Link>
+            <Link href="/search" onClick={() => setMenuOpen(false)} className="rounded-lg px-3 py-2.5 text-sm text-muted hover:bg-subtle hover:text-fg">搜索</Link>
+            <Link href="/bookmarks" onClick={() => setMenuOpen(false)} className="rounded-lg px-3 py-2.5 text-sm text-muted hover:bg-subtle hover:text-fg">收藏夹</Link>
+            {user ? (
+              <>
+                <Link href="/review" onClick={() => setMenuOpen(false)} className="rounded-lg px-3 py-2.5 text-sm text-muted hover:bg-subtle hover:text-fg">今日复习</Link>
+                <Link href="/dashboard" onClick={() => setMenuOpen(false)} className="rounded-lg px-3 py-2.5 text-sm text-muted hover:bg-subtle hover:text-fg">学习统计</Link>
+              </>
+            ) : (
+              <Link href="/auth/register" onClick={() => setMenuOpen(false)} className="rounded-lg bg-accent px-3 py-2.5 text-center text-sm font-medium text-white">注册并开始复习</Link>
+            )}
+          </nav>
         </div>
       )}
+
+      <CommandPalette key={commandOpen ? "open" : "closed"} open={commandOpen} onClose={() => setCommandOpen(false)} />
     </header>
   )
 }
+
+
+

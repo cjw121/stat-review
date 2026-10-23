@@ -1,48 +1,90 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 /* Enable class-based dark mode for Tailwind v4 */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* ---- Semantic color variables ---- */
 :root {
-  --bg-page:     #FAFAF8;
-  --bg-card:     #FFFFFF;
-  --fg-main:     #2D2D2D;
-  --fg-muted:    #6B7280;
-  --border-col:  #E5E7EB;
-  --primary:     #0F4C5C;
-  --primary-btn: #1A6B7A;
+  --bg-page: #f6f5f1;
+  --bg-card: #ffffff;
+  --bg-subtle: #ecebe5;
+  --fg-main: #201f1c;
+  --fg-muted: #6f6a61;
+  --fg-faint: #9b968b;
+  --border-col: #e3e0d7;
+  --border-strong: #c9c4b8;
+  --primary: #0e5a50;
+  --primary-strong: #0a463e;
+  --primary-soft: #e1efe9;
+  --accent: #c2601f;
+  --accent-strong: #9c4c16;
+  --accent-soft: #f8e9dd;
+  --success: #2f7d5b;
+  --warning: #b47a1a;
+  --danger: #b5443a;
+  --shadow-soft-base: 0 1px 2px rgba(20, 19, 16, 0.04), 0 8px 24px rgba(20, 19, 16, 0.05);
+  --shadow-lift-base: 0 2px 4px rgba(20, 19, 16, 0.05), 0 18px 48px rgba(20, 19, 16, 0.10);
 }
 
 .dark {
-  --bg-page:     #1A1D23;
-  --bg-card:     #23272F;
-  --fg-main:     #E5E7EB;
-  --fg-muted:    #9CA3AF;
-  --border-col:  #374151;
-  --primary:     #5BA3B5;
-  --primary-btn: #5BA3B5;
+  --bg-page: #111211;
+  --bg-card: #181a19;
+  --bg-subtle: #202322;
+  --fg-main: #ededea;
+  --fg-muted: #a4a69e;
+  --fg-faint: #747a72;
+  --border-col: #2a2d2a;
+  --border-strong: #3a3e39;
+  --primary: #62c6b8;
+  --primary-strong: #8bd9ce;
+  --primary-soft: #14322e;
+  --accent: #e28b57;
+  --accent-strong: #f0a97e;
+  --accent-soft: #3a2419;
+  --success: #74c69d;
+  --warning: #e4b45f;
+  --danger: #e5837a;
+  --shadow-soft-base: 0 1px 2px rgba(0, 0, 0, 0.18), 0 10px 28px rgba(0, 0, 0, 0.20);
+  --shadow-lift-base: 0 2px 4px rgba(0, 0, 0, 0.22), 0 20px 52px rgba(0, 0, 0, 0.30);
 }
 
-/* ---- Tailwind design tokens (inline = resolved at runtime via CSS vars) ---- */
 @theme inline {
-  --color-page:        var(--bg-page);
-  --color-card:        var(--bg-card);
-  --color-fg:          var(--fg-main);
-  --color-muted:       var(--fg-muted);
-  --color-border:      var(--border-col);
-  --color-primary:     var(--primary);
-  --color-primary-btn: var(--primary-btn);
+  --color-page: var(--bg-page);
+  --color-card: var(--bg-card);
+  --color-subtle: var(--bg-subtle);
+  --color-fg: var(--fg-main);
+  --color-muted: var(--fg-muted);
+  --color-faint: var(--fg-faint);
+  --color-border: var(--border-col);
+  --color-border-strong: var(--border-strong);
+  --color-primary: var(--primary);
+  --color-primary-strong: var(--primary-strong);
+  --color-primary-soft: var(--primary-soft);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-primary-btn: var(--accent);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
 
-  --font-sans: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Newsreader", "Noto Serif SC", "Songti SC", "STSong", ui-serif, Georgia, serif;
+
+  --shadow-soft: var(--shadow-soft-base);
+  --shadow-lift: var(--shadow-lift-base);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* ---- Base ---- */
+* {
+  border-color: var(--border-col);
+}
+
 html {
-  font-size: 17px;
-  line-height: 1.7;
+  font-size: 16px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  transition: background-color 200ms ease, color 200ms ease;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -50,51 +92,137 @@ body {
   background-color: var(--bg-page);
   color: var(--fg-main);
   font-family: var(--font-sans);
+  transition: background-color 220ms ease, color 220ms ease;
 }
 
-/* ---- Prose content (answers) ---- */
-.prose-content p { margin-bottom: 0.75em; }
+::selection {
+  background: color-mix(in srgb, var(--primary) 22%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+button, a, input, select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
+}
+
+.prose-content {
+  color: var(--fg-main);
+  font-size: 1.02rem;
+  line-height: 1.82;
+}
+
+.prose-content p {
+  margin-bottom: 0.8em;
+}
 
 .prose-content strong {
-  font-weight: 600;
-  color: var(--fg-main);
+  font-weight: 650;
+  color: var(--primary-strong);
+}
+
+.dark .prose-content strong {
+  color: var(--primary);
 }
 
 .prose-content ul,
 .prose-content ol {
-  margin: 0.4em 0 0.75em 1.5em;
+  margin: 0.4em 0 0.9em 1.4em;
 }
 
-.prose-content li { margin-bottom: 0.2em; }
+.prose-content li {
+  margin-bottom: 0.22em;
+}
+
+.prose-content li::marker {
+  color: var(--primary);
+}
 
 .prose-content table {
   border-collapse: collapse;
   width: 100%;
-  margin: 1em 0;
-  font-size: 0.9rem;
+  margin: 1.2em 0;
+  font-size: 0.92rem;
 }
 
 .prose-content th,
 .prose-content td {
   border: 1px solid var(--border-col);
-  padding: 0.4em 0.75em;
+  padding: 0.5em 0.8em;
   text-align: left;
 }
 
 .prose-content th {
-  background-color: var(--bg-page);
+  background: var(--bg-subtle);
   font-weight: 600;
 }
 
-/* ---- KaTeX display math ---- */
 .katex-display {
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0.5em 0;
+  margin: 0.5em 0;
 }
 
-/* ---- Answer collapse animation ---- */
 .answer-collapse {
   overflow: hidden;
-  transition: max-height 250ms ease, opacity 200ms ease;
+  transition: max-height 360ms var(--ease-out-soft), opacity 260ms ease;
 }
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-rise {
+  animation: rise-in 480ms var(--ease-out-soft) both;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade {
+  animation: fade-in 200ms ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@utility container-page {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@utility card-base {
+  background: var(--bg-card);
+  border: 1px solid var(--border-col);
+  border-radius: 1rem;
+}
+
+.hover-lift {
+  transition: transform 200ms var(--ease-out-soft), border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--primary) 35%, var(--border-col));
+  box-shadow: var(--shadow-lift);
+}
+

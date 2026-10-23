@@ -1,53 +1,100 @@
-'use client'
-import { useState, useEffect } from 'react'
-import type { Question } from '@/types'
-import { MathContent } from '@/components/MathContent'
-import { useBookmarks } from '@/hooks/useBookmarks'
-import { useMastery } from '@/hooks/useMastery'
-import { useAuth } from '@/contexts/AuthContext'
-import { supabase } from '@/lib/supabase'
-import { computeNextReview, defaultSM2State, STATUS_LABELS, STATUS_COLORS, type Rating, type SM2State } from '@/lib/sm2'
+﻿'use client'
+
+import { useEffect, useState } from "react"
+import Link from "next/link"
+import type { Question } from "@/types"
+import { MathContent } from "@/components/MathContent"
+import { useBookmarks } from "@/hooks/useBookmarks"
+import { useMastery } from "@/hooks/useMastery"
+import { useAuth } from "@/contexts/AuthContext"
+import { supabase } from "@/lib/supabase"
+import { computeNextReview, defaultSM2State, STATUS_LABELS, STATUS_COLORS, type Rating, type SM2State } from "@/lib/sm2"
+import { cn, toPreview } from "@/lib/utils"
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  BookmarkFilledIcon,
+  BookmarkIcon,
+  CheckIcon,
+  ChevronDownIcon,
+} from "@/components/icons"
 
 const difficultyColor: Record<string, string> = {
-  基础: 'text-emerald-600 bg-emerald-50 dark:text-emerald-400 dark:bg-emerald-900/30',
-  进阶: 'text-amber-600 bg-amber-50 dark:text-amber-400 dark:bg-amber-900/30',
-  拔高: 'text-rose-600 bg-rose-50 dark:text-rose-400 dark:bg-rose-900/30',
+  基础: "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300",
+  进阶: "bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300",
+  拔高: "bg-rose-50 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300",
 }
 
-export function QuestionDetail({ question }: { question: Question }) {
+type QuestionDetailProps = {
+  question: Question
+  prevQuestion: Question | null
+  nextQuestion: Question | null
+}
+
+export function QuestionDetail({ question, prevQuestion, nextQuestion }: QuestionDetailProps) {
   const [answerOpen, setAnswerOpen] = useState(false)
   const { isBookmarked, toggle: toggleBookmark } = useBookmarks()
   const { getStatus, setStatus } = useMastery()
   const mastery = getStatus(question.id)
   const { user } = useAuth()
 
-  // Supabase-based progress state (logged-in users)
   const [sm2State, setSm2State] = useState<SM2State>(defaultSM2State)
   const [ratingDone, setRatingDone] = useState(false)
   const [saving, setSaving] = useState(false)
 
   useEffect(() => {
     if (!user) return
-    supabase.from('question_progress')
-      .select('repetitions, interval_days, ease_factor, status')
-      .eq('user_id', user.id)
-      .eq('question_id', question.id)
+    supabase
+      .from("question_progress")
+      .select("repetitions, interval_days, ease_factor, status")
+      .eq("user_id", user.id)
+      .eq("question_id", question.id)
       .single()
       .then(({ data }) => {
-        if (data) setSm2State({ repetitions: data.repetitions, interval_days: data.interval_days, ease_factor: data.ease_factor, status: data.status })
+        if (data) {
+          setSm2State({
+            repetitions: data.repetitions,
+            interval_days: data.interval_days,
+            ease_factor: data.ease_factor,
+            status: data.status,
+          })
+        }
       })
   }, [user, question.id])
+
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return
+      if (e.key === " " || e.code === "Space") {
+        e.preventDefault()
+        setAnswerOpen((v) => !v)
+      } else if (e.key.toLowerCase() === "b") {
+        toggleBookmark(question.id)
+      }
+    }
+    window.addEventListener("keydown", onKeyDown)
+    return () => window.removeEventListener("keydown", onKeyDown)
+  }, [question.id, toggleBookmark])
 
   async function handleRating(rating: Rating) {
     if (!user || saving) return
     setSaving(true)
     const newState = computeNextReview(sm2State, rating)
-    await supabase.from('question_progress').upsert({
-      user_id: user.id, question_id: question.id, course_id: question.courseId,
-      ...newState, updated_at: new Date().toISOString(),
-    }, { onConflict: 'user_id,question_id' })
-    await supabase.from('review_log').insert({
-      user_id: user.id, question_id: question.id, course_id: question.courseId, result: rating,
+    await supabase.from("question_progress").upsert(
+      {
+        user_id: user.id,
+        question_id: question.id,
+        course_id: question.courseId,
+        ...newState,
+        updated_at: new Date().toISOString(),
+      },
+      { onConflict: "user_id,question_id" },
+    )
+    await supabase.from("review_log").insert({
+      user_id: user.id,
+      question_id: question.id,
+      course_id: question.courseId,
+      result: rating,
     })
     setSm2State(newState)
     setRatingDone(true)
@@ -55,106 +102,130 @@ export function QuestionDetail({ question }: { question: Question }) {
   }
 
   return (
-    <article>
-      {/* Meta */}
-      <div className="flex flex-wrap items-center gap-2 mb-4">
-        <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${difficultyColor[question.difficulty] ?? 'text-muted'}`}>
+    <article className="animate-rise">
+      <div className="mt-6 flex flex-wrap items-center gap-2">
+        <span className={cn("rounded-full px-2.5 py-1 text-xs font-medium", difficultyColor[question.difficulty] ?? "bg-subtle text-muted")}>
           {question.difficulty}
         </span>
         {question.tags.map((tag) => (
-          <span key={tag} className="text-xs text-muted bg-page border border-border px-2.5 py-1 rounded-full">{tag}</span>
+          <span key={tag} className="rounded-full border border-border bg-card px-2.5 py-1 text-xs text-muted">
+            {tag}
+          </span>
         ))}
-        {/* 登录用户显示当前掌握状态 */}
-        {user && sm2State.status !== 'new' && (
-          <span className="text-xs px-2.5 py-1 rounded-full border" style={{ color: STATUS_COLORS[sm2State.status], borderColor: STATUS_COLORS[sm2State.status], background: STATUS_COLORS[sm2State.status] + '20' }}>
+        {user && sm2State.status !== "new" && (
+          <span
+            className="rounded-full border px-2.5 py-1 text-xs font-medium"
+            style={{
+              color: STATUS_COLORS[sm2State.status],
+              borderColor: STATUS_COLORS[sm2State.status],
+              background: STATUS_COLORS[sm2State.status] + "1f",
+            }}
+          >
             {STATUS_LABELS[sm2State.status]}
           </span>
         )}
       </div>
 
-      {/* Question */}
-      <div className="bg-card border border-border rounded-xl p-5 mb-4">
-        <h2 className="text-xs font-semibold text-muted uppercase tracking-wider mb-3">面试题</h2>
-        <div className="text-fg text-[17px] leading-relaxed">
+      <div className="card-base mt-5 p-5 md:p-6">
+        <div className="mb-3 flex items-center gap-2">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-faint">面试题</span>
+          <span className="h-px flex-1 bg-border" />
+        </div>
+        <div className="text-[17px] leading-relaxed text-fg">
           <MathContent content={question.question} block />
         </div>
       </div>
 
-      {/* Action bar */}
-      <div className="flex flex-wrap items-center gap-2 mb-4">
-        <button
-          onClick={() => toggleBookmark(question.id)}
-          className={`flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-lg border transition-all duration-150 ${
-            isBookmarked(question.id)
-              ? 'text-primary border-primary bg-primary/10'
-              : 'text-muted border-border hover:border-primary/50'
-          }`}
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill={isBookmarked(question.id) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2">
-            <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/>
-          </svg>
-          {isBookmarked(question.id) ? '已收藏' : '收藏'}
-        </button>
-
-        {/* 未登录：原有两档标记 */}
-        {!user && ([
-          { value: 'mastered' as const, label: '✓ 已掌握', color: 'text-emerald-600 border-emerald-400 bg-emerald-50 dark:bg-emerald-900/30' },
-          { value: 'unsure' as const, label: '△ 不熟练', color: 'text-amber-600 border-amber-400 bg-amber-50 dark:bg-amber-900/30' },
-        ].map(opt => (
-          <button
-            key={opt.value}
-            onClick={() => setStatus(question.id, mastery === opt.value ? null : opt.value)}
-            className={`text-sm px-3 py-1.5 rounded-lg border transition-all duration-150 ${mastery === opt.value ? opt.color : 'text-muted border-border hover:border-primary/50'}`}
-          >{opt.label}</button>
-        )))}
-      </div>
-
-      {/* Answer */}
-      <div className="bg-card border border-border rounded-xl overflow-hidden mb-4">
+      <div className="sticky bottom-3 z-20 mt-4 flex flex-wrap items-center gap-2">
         <button
           onClick={() => setAnswerOpen((v) => !v)}
-          className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-page transition-colors duration-150"
+          className="inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-accent-strong"
         >
-          <span className="font-semibold text-fg">参考答案</span>
-          <svg
-            width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-            className={`text-muted transition-transform duration-200 ${answerOpen ? 'rotate-180' : ''}`}
-          >
-            <path d="m6 9 6 6 6-6"/>
-          </svg>
+          {answerOpen ? "收起答案" : "查看答案"}
+          <ChevronDownIcon size={15} className={cn("transition-transform", answerOpen && "rotate-180")} />
         </button>
-        <div className="answer-collapse" style={{ maxHeight: answerOpen ? '9999px' : '0', opacity: answerOpen ? 1 : 0 }}>
-          <div className="px-5 pb-5 border-t border-border pt-4">
-            <div className="text-fg text-[16px] leading-relaxed">
+        <button
+          onClick={() => toggleBookmark(question.id)}
+          className={cn(
+            "inline-flex items-center gap-2 rounded-xl border px-3.5 py-2.5 text-sm font-medium transition-colors",
+            isBookmarked(question.id)
+              ? "border-primary bg-primary-soft text-primary"
+              : "border-border bg-card text-muted hover:border-border-strong hover:text-fg",
+          )}
+        >
+          {isBookmarked(question.id) ? <BookmarkFilledIcon size={16} /> : <BookmarkIcon size={16} />}
+          {isBookmarked(question.id) ? "已收藏" : "收藏"}
+          <kbd className="hidden rounded border border-border bg-subtle px-1 text-[10px] text-faint sm:inline">B</kbd>
+        </button>
+
+        {!user && (
+          <>
+            {([
+              { value: "mastered" as const, label: "已掌握", active: "border-emerald-400 bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300" },
+              { value: "unsure" as const, label: "不熟练", active: "border-amber-400 bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300" },
+            ]).map((opt) => (
+              <button
+                key={opt.value}
+                onClick={() => setStatus(question.id, mastery === opt.value ? null : opt.value)}
+                className={cn(
+                  "inline-flex items-center gap-1.5 rounded-xl border px-3.5 py-2.5 text-sm font-medium transition-colors",
+                  mastery === opt.value ? opt.active : "border-border bg-card text-muted hover:border-border-strong hover:text-fg",
+                )}
+              >
+                {mastery === opt.value && <CheckIcon size={15} />}
+                {opt.label}
+              </button>
+            ))}
+          </>
+        )}
+      </div>
+
+      <div className="card-base mt-4 overflow-hidden">
+        <div className="answer-collapse" style={{ maxHeight: answerOpen ? "9999px" : "0", opacity: answerOpen ? 1 : 0 }}>
+          <div className="border-t border-border p-5 md:p-6">
+            <div className="mb-3 flex items-center gap-2">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-faint">参考答案</span>
+              <span className="h-px flex-1 bg-border" />
+            </div>
+            <div className="text-[16px] leading-relaxed text-fg">
               <MathContent content={question.answer} block />
             </div>
           </div>
         </div>
       </div>
 
-      {/* 登录用户：三档自评 */}
       {user && (
-        <div className="bg-card border border-border rounded-xl p-4 mb-4">
+        <div className="card-base mt-4 p-4">
           {ratingDone ? (
-            <div className="text-center text-sm text-muted">
-              已记录！下次复习：{new Date(computeNextReview(sm2State, 'remember').next_review_at).toLocaleDateString('zh-CN')}
-              <button onClick={() => setRatingDone(false)} className="ml-2 text-primary hover:underline">重新评分</button>
+            <div className="flex items-center justify-between gap-3 text-sm text-muted">
+              <span>
+                已记录！下次复习：
+                {new Date(computeNextReview(sm2State, "remember").next_review_at).toLocaleDateString("zh-CN")}
+              </span>
+              <button onClick={() => setRatingDone(false)} className="font-medium text-primary hover:underline">
+                重新评分
+              </button>
             </div>
           ) : (
             <>
-              <p className="text-xs text-muted text-center mb-3">自评掌握程度（将纳入复习计划）</p>
+              <p className="mb-3 text-center text-xs text-muted">自评掌握程度，将自动纳入复习计划</p>
               <div className="grid grid-cols-3 gap-2">
                 {([
-                  { rating: 'forget' as Rating, label: '忘记了', style: 'border-rose-400 text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-900/30' },
-                  { rating: 'vague' as Rating, label: '模糊', style: 'border-amber-400 text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-900/30' },
-                  { rating: 'remember' as Rating, label: '记得', style: 'border-emerald-400 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-900/30' },
-                ]).map(opt => (
+                  { rating: "forget" as Rating, label: "忘记了", style: "border-rose-200 text-rose-600 hover:border-rose-400 hover:bg-rose-50 dark:border-rose-900 dark:hover:bg-rose-900/20" },
+                  { rating: "vague" as Rating, label: "模糊", style: "border-amber-200 text-amber-600 hover:border-amber-400 hover:bg-amber-50 dark:border-amber-900 dark:hover:bg-amber-900/20" },
+                  { rating: "remember" as Rating, label: "记得", style: "border-emerald-200 text-emerald-600 hover:border-emerald-400 hover:bg-emerald-50 dark:border-emerald-900 dark:hover:bg-emerald-900/20" },
+                ]).map((opt) => (
                   <button
                     key={opt.rating}
-                    onClick={() => { setAnswerOpen(true); handleRating(opt.rating) }}
+                    onClick={() => {
+                      setAnswerOpen(true)
+                      handleRating(opt.rating)
+                    }}
                     disabled={saving}
-                    className={`border-2 py-2.5 rounded-xl text-sm font-semibold transition-all duration-150 disabled:opacity-50 ${opt.style}`}
-                  >{opt.label}</button>
+                    className={cn("rounded-xl border-2 py-2.5 text-sm font-semibold transition-all disabled:opacity-50", opt.style)}
+                  >
+                    {opt.label}
+                  </button>
                 ))}
               </div>
             </>
@@ -162,20 +233,41 @@ export function QuestionDetail({ question }: { question: Question }) {
         </div>
       )}
 
-      {/* Followups */}
       {question.followups.length > 0 && (
-        <div className="bg-card border border-border rounded-xl p-5">
-          <h3 className="text-xs font-semibold text-muted uppercase tracking-wider mb-3">面试官可能的追问</h3>
-          <ul className="flex flex-col gap-2">
-            {question.followups.map((f, i) => (
-              <li key={i} className="flex items-start gap-2 text-[15px] text-fg">
-                <span className="text-primary mt-0.5 shrink-0">→</span>
-                <MathContent content={f} />
+        <div className="card-base mt-4 p-5 md:p-6">
+          <div className="mb-4 flex items-center gap-2">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-faint">面试官可能的追问</span>
+            <span className="h-px flex-1 bg-border" />
+          </div>
+          <ul className="flex flex-col gap-3">
+            {question.followups.map((followup, index) => (
+              <li key={index} className="flex items-start gap-3 text-[15px] leading-relaxed text-fg">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                <MathContent content={followup} />
               </li>
             ))}
           </ul>
         </div>
       )}
+
+      <div className="mt-6 grid gap-3 sm:grid-cols-2">
+        {prevQuestion ? (
+          <Link href={"/question/" + prevQuestion.id} className="group card-base hover-lift p-4">
+            <span className="flex items-center gap-1.5 text-xs text-muted">
+              <ArrowLeftIcon size={13} /> 上一题
+            </span>
+            <span className="mt-2 block line-clamp-2 text-sm text-fg group-hover:text-primary">{toPreview(prevQuestion.question, 80)}</span>
+          </Link>
+        ) : <span />}
+        {nextQuestion ? (
+          <Link href={"/question/" + nextQuestion.id} className="group card-base hover-lift p-4 text-right">
+            <span className="flex items-center justify-end gap-1.5 text-xs text-muted">
+              下一题 <ArrowRightIcon size={13} />
+            </span>
+            <span className="mt-2 block line-clamp-2 text-sm text-fg group-hover:text-primary">{toPreview(nextQuestion.question, 80)}</span>
+          </Link>
+        ) : <span />}
+      </div>
     </article>
   )
 }

@@ -1,4 +1,5 @@
-import Link from 'next/link'
+﻿import Link from "next/link"
+import { ChevronRightIcon } from "./icons"
 
 interface Crumb {
   label: string
@@ -7,19 +8,16 @@ interface Crumb {
 
 export function Breadcrumb({ crumbs }: { crumbs: Crumb[] }) {
   return (
-    <nav className="flex flex-wrap items-center gap-1 text-sm text-muted mb-4">
+    <nav aria-label="面包屑" className="flex flex-wrap items-center gap-1.5 text-[13px] text-muted">
       {crumbs.map((crumb, i) => (
-        <span key={i} className="flex items-center gap-1">
-          {i > 0 && <span className="opacity-40">/</span>}
+        <span key={i} className="flex items-center gap-1.5">
+          {i > 0 && <ChevronRightIcon size={13} className="text-faint" />}
           {crumb.href ? (
-            <Link
-              href={crumb.href}
-              className="hover:text-primary transition-colors duration-150"
-            >
+            <Link href={crumb.href} className="transition-colors hover:text-primary">
               {crumb.label}
             </Link>
           ) : (
-            <span className="text-fg font-medium">{crumb.label}</span>
+            <span className="font-medium text-fg">{crumb.label}</span>
           )}
         </span>
       ))}
